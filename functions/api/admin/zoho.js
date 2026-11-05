@@ -4,7 +4,7 @@ import { safeEqual, sameOrigin, processPending, connectionStatus } from "../../_
 export async function onRequestGet({ request, env }) { return handle(request, env, false); }
 export async function onRequestPost({ request, env }) { return handle(request, env, true); }
 async function handle(request, env, retry) {
-  if (identifySite(request) !== "tettochiaro") return json({ ok: false, error: "site_not_allowed" }, 403);
+  if (!identifySite(request)) return json({ ok: false, error: "site_not_allowed" }, 403);
   if (retry && !sameOrigin(request)) return json({ ok: false, error: "origin_rejected" }, 403);
   const h = request.headers.get("Authorization") || "", m = h.match(/^Basic\s+(.+)$/i);
   let pair = ""; try { pair = m ? atob(m[1]) : ""; } catch {}

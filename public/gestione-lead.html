@@ -93,7 +93,7 @@
       id: row.id,
       createdAt: formatDate(row.created_at),
       updatedAt: formatDate(row.updated_at),
-      site: row.site === 'tettocondominio' ? 'TettoCondominio' : text(row.site || 'TettoCondominiale'),
+      site: ({ tettochiaro:'TettoChiaro', preventivotetto:'PreventivoTetto', tettocondominiale:'TettoCondominiale', puliziecondominialiverona:'PulizieCondominialiVerona', tettocondominio:'TettoCondominio' }[row.site] || text(row.site || 'TettoCondominiale')),
       event: eventLabel(row.event_type),
       firstName: firstName || (row.full_name === 'Solo calcolo' ? 'Solo calcolo' : '—'),
       lastName: lastName || '—',

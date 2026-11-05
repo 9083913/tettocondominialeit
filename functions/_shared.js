@@ -1,10 +1,13 @@
 
 const SITE_BY_HOST = {
-  "tettocondominialeit.pages.dev": "tettochiaro",
-  "tettocondominiale.pages.dev": "tettochiaro",
-  "tettocondominiale.it": "tettochiaro",
-  "www.tettocondominiale.it": "tettochiaro",
+  "tettocondominialeit.pages.dev": "tettocondominiale",
+  "tettocondominiale.pages.dev": "tettocondominiale",
+  "tettocondominiale.it": "tettocondominiale",
+  "www.tettocondominiale.it": "tettocondominiale",
 };
+
+// Sites whose leads are queued for CRM sync (zoho_outbox; cron adds pipedrive_outbox).
+export const CRM_SITES = new Set(["tettochiaro", "preventivotetto", "tettocondominiale", "puliziecondominialiverona"]);
 
 export function json(data, status = 200) {
   return new Response(JSON.stringify(data), {
@@ -19,7 +22,9 @@ export function json(data, status = 200) {
 
 export function identifySite(request) {
   const host = new URL(request.url).hostname.toLowerCase();
-  return SITE_BY_HOST[host] || null;
+  if (SITE_BY_HOST[host]) return SITE_BY_HOST[host];
+  if (host.endsWith(".tettocondominialeit.pages.dev") || host.endsWith(".tettocondominiale.pages.dev")) return "tettocondominiale";
+  return null;
 }
 
 export async function readJson(request) {
@@ -169,21 +174,22 @@ export async function capture(request, env, eventType, ctx) {
       const leadWrite = env.LEADS_DB.prepare(
         "INSERT INTO lead_records (id, site, event_type, created_at, updated_at, full_name, phone, email, lead_score, privacy_accepted, partner_accepted, payload_json) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT(id) DO UPDATE SET event_type = excluded.event_type, updated_at = excluded.updated_at, full_name = excluded.full_name, phone = excluded.phone, email = excluded.email, lead_score = excluded.lead_score, privacy_accepted = excluded.privacy_accepted, partner_accepted = excluded.partner_accepted, payload_json = excluded.payload_json"
       ).bind(id, site, eventType, now, now, eventType === "lead" ? fullName : null, eventType === "lead" ? phone : null, email, score, privacyAccepted ? 1 : 0, partnerAccepted ? 1 : 0, payloadJson);
-      if (eventType === "lead" && site === "tettochiaro") {
+      if (eventType === "lead" && CRM_SITES.has(site)) {
         const outboxWrite = env.LEADS_DB.prepare("INSERT OR IGNORE INTO zoho_outbox(lead_id,state,attempts,next_attempt_at,created_at,updated_at) VALUES(?,'pending',0,?,?,?)").bind(id, now, now, now);
         await env.LEADS_DB.batch([leadWrite, outboxWrite]);
       } else {
         await leadWrite.run();
       }
     }
-    if (eventType === "lead" && site === "tettochiaro") {
+    if (eventType === "lead" && CRM_SITES.has(site)) {
       if (ctx?.waitUntil) {
         const sync = import("./_zoho.js").then(({ processPending }) => processPending(env, 1)).catch(() => {});
         ctx.waitUntil(sync);
       }
     }
     return json({ ok: true, id, type: eventType });
-  } catch {
+  } catch (err) {
+    console.error("lead_save_failed", site, eventType, String(err && err.message || err));
     return json({ ok: false, error: "save_failed" }, 500);
   }
 }

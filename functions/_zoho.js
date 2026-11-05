@@ -91,19 +91,37 @@ async function api(env,c,token,path,options={}) {
   if(!r.ok) throw new Error(`zoho_http_${r.status}`);
   return data;
 }
+const SITE_LABELS = {
+  tettochiaro: "TettoChiaro",
+  preventivotetto: "PreventivoTetto",
+  tettocondominiale: "TettoCondominiale",
+  puliziecondominialiverona: "PulizieCondominialiVerona",
+  tettocondominio: "TettoCondominio",
+};
+const CRM_SITE_KEYS = Object.keys(SITE_LABELS);
+function siteLabel(site) { return SITE_LABELS[site] || site || "Lead"; }
 function field(s,n) { return typeof s==="string"?s.trim().slice(0,n):""; }
 export async function syncLead(env, leadId) {
-  const d=db(env), row=await d.prepare("SELECT id,event_type,created_at,payload_json FROM lead_records WHERE id=? AND site='tettochiaro' AND event_type='lead'").bind(leadId).first();
-  if(!row) throw new Error("lead_missing"); const p=JSON.parse(row.payload_json), contact=p.contact||{};
+  const placeholders = CRM_SITE_KEYS.map(()=>"?").join(",");
+  const d=db(env), row=await d.prepare(`SELECT id,site,event_type,created_at,payload_json FROM lead_records WHERE id=? AND site IN (${placeholders}) AND event_type='lead'`).bind(leadId, ...CRM_SITE_KEYS).first();
+  if(!row) throw new Error("lead_missing"); const p=JSON.parse(row.payload_json), contact=p.contact||{}, ans=p.answers||{}, q=ans.quote||{};
+  const label=siteLabel(row.site);
   const email=field(contact.email,254).toLowerCase();
-  const data={Last_Name:field(contact.lastName,80),Email:email};
-  const first=field(contact.firstName,40), phone=field(contact.phone,30), city=field(p.answers?.city,100), zip=field(p.cap,30);
+  const data={Last_Name:field(contact.lastName,80)||field(contact.fullName,80)||"Lead",Email:email,Tag:[{name:row.site}]};
+  const first=field(contact.firstName,40), phone=field(contact.phone,30), city=field(ans.city||ans.comune,100), zip=field(p.cap||ans.cap,30);
   if(first)data.First_Name=first;if(phone)data.Phone=phone;if(city)data.City=city;if(zip)data.Zip_Code=zip;
+  if(ans.street||ans.address)data.Street=field(ans.street||ans.address,250);
+  if(ans.partner)data.Company=field(contact.fullName,200);
+  if(row.site==="puliziecondominialiverona"){
+    data.Description=field(`Sito: puliziecondominialiverona.it\nTag: ${row.site}\nTipo: ${ans.partner?"Candidatura partner ("+(ans.tipo||"")+")":"Richiesta preventivo pulizie"}\nIndirizzo: ${ans.address||""}\nCittà: ${ans.city||""}\nStima mensile: ${q.stimaMensileEur!=null?q.stimaMensileEur+" €/mese + IVA":"-"}\nRiepilogo: ${q.riepilogo||""}\nPiani: ${q.piani??""} · Appartamenti: ${q.appartamenti??""} · Ascensore: ${q.ascensore?"sì":"no"} · Area esterna: ${q.areaEsterna?"sì":"no"} · Garage: ${q.garage?"sì":"no"} · Più scale: ${q.piuScale?"sì":"no"} · Frequenza: ${q.frequenza||""}`,32000);
+  } else {
+    data.Description=field(`Sito: ${label} (tag: ${row.site})\nRuolo: ${ans.ruolo||""}\nCittà: ${ans.city||ans.comune||""}\nCAP: ${p.cap||ans.cap||""}\nIntervento: ${ans.intervento||p.estimate?.intervention||""}\nScore: ${p.lead_score??""}`,32000);
+  }
   if(!email||!data.Last_Name) throw new Error("lead_invalid");
   const c=await config(env), token=await accessToken(env,c);
   const up=await api(env,c,token,"/Leads/upsert",{method:"POST",body:JSON.stringify({data:[data],duplicate_check_fields:["Email"],trigger:[]})});
   const result=up.data?.[0]; if(result?.status!=="success" || !result.details?.id) throw new Error("zoho_upsert_rejected");
-  const crmId=result.details.id, title=`TettoCondominiale richiesta ${row.id}`;
+  const crmId=result.details.id, title=`${label} richiesta ${row.id}`;
   let found=false, more=false;
   for(let page=1;page<=10;page++) {
     const notes=await api(env,c,token,`/Leads/${encodeURIComponent(crmId)}/Notes?fields=id,Note_Title&per_page=200&page=${page}`,{method:"GET"});
@@ -112,7 +130,7 @@ export async function syncLead(env, leadId) {
   }
   if(!found) {
     if(more)throw new Error("notes_pagination_required");
-    const content="Richiesta dal sito TettoCondominiale\n"+JSON.stringify({request_id:row.id,created_at:row.created_at,...p},null,2);
+    const content=`Richiesta dal sito ${label} (tag: ${row.site})\n`+JSON.stringify({request_id:row.id,site:row.site,created_at:row.created_at,...p},null,2);
     const note=await api(env,c,token,`/Leads/${encodeURIComponent(crmId)}/Notes`,{method:"POST",body:JSON.stringify({data:[{Note_Title:title,Note_Content:content,Parent_Id:{module:{api_name:"Leads"},id:crmId}}]})});
     if(note.data?.[0]?.status!=="success") throw new Error("zoho_note_rejected");
   }
