@@ -1,0 +1,16 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "tettocondominialeit",
+  "pages_build_output_dir": "./public",
+  "compatibility_date": "2026-10-25",
+  "d1_databases": [
+    {
+      "binding": "LEADS_DB",
+      "database_name": "tetto_lead",
+      "database_id": "3278e438-a7a3-40b9-87a4-a9e83ea49b74"
+    }
+  ],
+  "vars": {
+    "LEADS_ENABLED": "true"
+  }
+}

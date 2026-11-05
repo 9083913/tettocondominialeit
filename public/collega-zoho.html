@@ -1,0 +1,34 @@
+
+<!doctype html>
+<html lang="it">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Collega Zoho CRM — TettoCondominiale</title>
+<body style="font:16px system-ui;max-width:600px;margin:3rem auto;padding:0 1rem;color:#17212b">
+<h1>Collega Zoho CRM</h1>
+<p>Il token temporaneo consente di avviare o riprendere l’autorizzazione. Client ID e Client Secret servono soltanto per la prima configurazione. I valori non vengono salvati nel browser.</p>
+<form id="form">
+<label for="zoho-token">Token di configurazione</label><br><input id="zoho-token" name="token" type="password" autocomplete="off" required style="width:100%;padding:.7rem">
+<p><label for="zoho-client-id">Client ID</label><br><input id="zoho-client-id" name="clientId" autocomplete="off" required style="width:100%;padding:.7rem"></p>
+<p><label for="zoho-client-secret">Client Secret</label><br><input id="zoho-client-secret" name="clientSecret" type="password" autocomplete="new-password" required style="width:100%;padding:.7rem"></p>
+<button>Salva configurazione</button>
+</form>
+<p><button id="authorize">Avvia autorizzazione Zoho</button></p><output id="status" aria-live="polite"></output>
+<script>
+const form=document.querySelector('#form'),status=document.querySelector('#status'),auth=document.querySelector('#authorize'),tokenInput=document.querySelector('#zoho-token');
+let setupToken='';
+async function post(body){const r=await fetch('/api/zoho/setup',{method:'POST',headers:{'Content-Type':'application/json','X-Zoho-Setup-Token':setupToken},body:JSON.stringify(body)});return [r,await r.json()]}
+form.addEventListener('submit',async e=>{
+ e.preventDefault();const fd=new FormData(form);setupToken=String(fd.get('token'));
+ try{const [r,j]=await post({action:'configure',clientId:String(fd.get('clientId')),clientSecret:String(fd.get('clientSecret'))});status.textContent=r.ok?'Configurazione salvata. Ora avvia l’autorizzazione.':'Configurazione non salvata ('+j.error+').';}
+ catch{status.textContent='Connessione non disponibile. Riprova.';}
+ finally{form.reset();}
+});
+auth.addEventListener('click',async()=>{
+ setupToken=tokenInput.value||setupToken;if(!setupToken){status.textContent='Inserisci il token di configurazione.';return;}
+ try{const [r,j]=await post({action:'authorize'});if(!r.ok){status.textContent='Impossibile avviare ('+j.error+').';return;}setupToken='';form.reset();location.assign(j.url);}
+ catch{status.textContent='Connessione non disponibile. Riprova.';}
+});
+</script>
+</body></html>
+
+

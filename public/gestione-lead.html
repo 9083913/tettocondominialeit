@@ -1,0 +1,246 @@
+
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#12304A">
+  <title>Archivio stime e richieste</title>
+  <style>
+    :root{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#172b3a;background:#f4f7f9;font-synthesis:none;text-rendering:optimizeLegibility}
+    *{box-sizing:border-box}body{margin:0}.wrap{max-width:1400px;margin:0 auto;padding:24px 16px 56px}.top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin:8px 0 24px}.brand{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#c46d2c}.brand span{color:#12304a}.title{margin:8px 0 4px;font-size:clamp(25px,5vw,36px);letter-spacing:-.04em}.sub{margin:0;color:#60717e;line-height:1.5}.card{background:white;border:1px solid #dde5ea;border-radius:16px;padding:20px;box-shadow:0 8px 24px #12304a0a}.auth{max-width:440px;margin:42px auto}.label{display:block;font-size:14px;font-weight:650;margin:18px 0 8px}input{width:100%;padding:13px 14px;border:1px solid #cbd6de;border-radius:10px;font:inherit}button{border:0;border-radius:10px;padding:12px 16px;background:#12304a;color:white;font:inherit;font-weight:700;cursor:pointer}button:disabled{opacity:.55;cursor:wait}.btn-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.secondary{background:#e9eff3;color:#17364c}.auth button{width:100%;margin-top:14px}.message{min-height:22px;margin:12px 0 0;color:#a23d30;font-size:14px}.hidden{display:none!important}.toolbar{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin:20px 0}.status{font-size:14px;color:#60717e}.scroll-hint{margin:0 0 10px;color:#60717e;font-size:13px}.table-wrap{overflow:auto;border:1px solid #dde5ea;border-radius:12px;background:#fff;max-width:100%;overscroll-behavior-x:contain}table{width:max-content;min-width:100%;border-collapse:separate;border-spacing:0;table-layout:auto}th,td{text-align:left;padding:11px 12px;border-bottom:1px solid #edf1f4;vertical-align:top;font-size:12px;white-space:nowrap}th{background:#f7f9fa;color:#455967;font-size:11px;text-transform:uppercase;letter-spacing:.04em;position:sticky;top:0;z-index:1}tbody tr:hover{background:#fbfcfd}td strong{display:block;color:#18364c}td small{display:block;color:#667985;margin-top:4px;overflow-wrap:anywhere}.pill{display:inline-block;background:#edf3f6;border-radius:99px;padding:4px 8px;color:#27465b;font-size:12px;font-weight:650}.multiline{white-space:pre-line;min-width:240px;max-width:360px;overflow-wrap:anywhere}.estimate-cell{white-space:nowrap;font-weight:700;color:#17364c;font-variant-numeric:tabular-nums}.details summary{cursor:pointer;color:#345a72}.details pre{white-space:pre-wrap;word-break:break-word;min-width:300px;max-width:600px;max-height:250px;overflow:auto;font-size:11px;background:#f6f8f9;padding:10px;border-radius:8px}.footer{color:#71818b;font-size:12px;line-height:1.5;margin:16px 2px}.empty{padding:30px;text-align:center;color:#657984}.error{color:#a23d30}.ok{color:#24724a}
+    @media(max-width:600px){.wrap{padding:18px 12px 40px}.top{display:block}.card{padding:17px}.toolbar{align-items:stretch}.toolbar .btn-row{width:100%}.toolbar button{flex:1}.table-wrap{border-radius:10px}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="top">
+      <div><div class="brand"><span>Tetto</span> · Archivio</div><h1 class="title">Stime e richieste TettoCondominiale</h1><p class="sub">Archivio riservato di questo sito. I dati si caricano solo dopo l’accesso.</p><p class="sub">I lead vengono salvati qui. Il pannello non invia notifiche email automatiche.</p></div>
+    </header>
+
+    <section id="login-card" class="card auth" aria-labelledby="login-title">
+      <h2 id="login-title">Accesso riservato</h2>
+      <p class="sub">Inserisci la password di gestione per vedere i dati ed esportarli.</p>
+      <form id="login-form">
+        <label class="label" for="password">Password</label>
+        <input id="password" type="password" autocomplete="current-password" required>
+        <button id="login-button" type="submit">Accedi</button>
+      </form>
+      <p id="login-message" class="message" role="status" aria-live="polite"></p>
+    </section>
+
+    <section id="archive" class="hidden" aria-live="polite">
+      <div class="toolbar">
+        <p id="record-count" class="status">Caricamento archivio…</p>
+        <div class="btn-row"><button id="export-button" type="button">Esporta tutto in CSV</button><button id="logout-button" class="secondary" type="button">Esci</button></div>
+      </div>
+      <p class="scroll-hint">Sono visibili in colonne i dati raccolti, i dettagli della stima, i consensi e i parametri di provenienza. Su schermi piccoli scorri la tabella in orizzontale.</p>
+      <div class="table-wrap"><table><thead><tr id="column-headings"></tr></thead><tbody id="rows"></tbody></table><div id="empty" class="empty hidden">Nessuna stima o richiesta registrata.</div></div>
+      <div class="toolbar"><p id="page-status" class="status"></p><button id="load-more" class="secondary hidden" type="button">Carica altre righe</button></div>
+      <p id="archive-message" class="message" role="status" aria-live="polite"></p>
+      <p class="footer">Il CSV usa il separatore “;” per aprirsi correttamente in Excel con impostazioni italiane. Le richieste di contatto sono conservate per un massimo di 12 mesi. Esci e chiudi la scheda su dispositivi condivisi.</p>
+    </section>
+  </main>
+<script>
+(() => {
+  const loginCard = document.getElementById('login-card');
+  const archive = document.getElementById('archive');
+  const passwordInput = document.getElementById('password');
+  const loginMessage = document.getElementById('login-message');
+  const archiveMessage = document.getElementById('archive-message');
+  const tableBody = document.getElementById('rows');
+  const headerRow = document.getElementById('column-headings');
+  const recordCount = document.getElementById('record-count');
+  const loadMoreButton = document.getElementById('load-more');
+  const exportButton = document.getElementById('export-button');
+  let password = '';
+  let rows = [];
+  let nextOffset = null;
+
+  const COLUMNS = [
+    ['id','ID record'],['createdAt','Data registrazione'],['updatedAt','Ultimo aggiornamento'],['site','Sito'],['event','Tipo richiesta'],
+    ['firstName','Nome'],['lastName','Cognome'],['email','Email'],['phone','Telefono'],['role','Ruolo'],['managesMultiple','Gestisce più stabili'],
+    ['cap','CAP'],['city','Comune'],['intervention','Intervento'],['mqDeclared','Superficie dichiarata (mq)'],['mqUnknown','Superficie stimata automaticamente'],['mqEffective','Superficie usata nel calcolo (mq)'],['apartments','Appartamenti'],['buildingYear','Anno edificio'],['state','Stato segnalato'],
+    ['estimate','Stima totale'],['perApartment','Stima per appartamento'],['works','Lavori'],['scaffolding','Ponteggio'],['remediation','Bonifica amianto'],['fees','Sicurezza / spese tecniche'],['vat','IVA'],['facade','Facciata stimata (mq)'],['floors','Piani stimati'],['asbestos','Amianto segnalato'],['region','Regione tariffaria'],['regionFactor','Coefficiente regionale'],['repair','Riparazione localizzata'],['estimateRows','Voci dettagliate della stima'],
+    ['leadScore','Punteggio lead'],['privacy','Consenso privacy'],['partner','Consenso partner'],['consentAt','Data consensi'],['variant','Variante sito'],['clientTimestamp','Data invio dal browser'],
+    ['utmSource','UTM source'],['utmMedium','UTM medium'],['utmCampaign','UTM campaign'],['utmTerm','UTM term'],['utmContent','UTM content'],['gclid','Google click ID'],['fbclid','Meta click ID'],['page','Pagina di origine'],['referrer','Dominio di provenienza'],['details','Dettagli completi']
+  ];
+  const INTERVENTIONS = {completo:'Rifacimento completo',manto:'Solo manto di copertura',riparazione:'Riparazione infiltrazione',sopralluogo:'Sopralluogo / da definire'};
+  const ROLES = {amministratore:'Amministratore',consiglio:'Membro del consiglio',condomino:'Condomino',impresa:'Impresa'};
+  const YEARS = {pre1970:'Prima del 1970','1970-1990':'1970–1990','1991-2010':'1991–2010',post2010:'Dopo il 2010'};
+  const STATES = {infiltrazioni:'Infiltrazioni attive',tegole:'Tegole rotte o spostate',muffa:'Muffa o macchie',grondaie:'Grondaie ammalorate',amianto:'Possibile amianto',nonso:'Non lo so'};
+  const euro = value => value == null || value === '' || !Number.isFinite(Number(value)) ? '—' : `€ ${Number(value).toLocaleString('it-IT',{maximumFractionDigits:0})}`;
+  const yesNo = value => value === true || value === 1 || value === '1' ? 'Sì' : value === false || value === 0 || value === '0' ? 'No' : value == null || value === '' ? '—' : String(value);
+  const formatDate = value => { const d = new Date(value); return value && !Number.isNaN(d.getTime()) ? d.toLocaleString('it-IT') : (value || '—'); };
+  const range = (low, high) => low == null || high == null ? '—' : `${euro(low)} — ${euro(high)}`;
+  const pair = value => Array.isArray(value) && value.length >= 2 ? range(value[0],value[1]) : '—';
+  function headers() { return { Authorization: 'Basic ' + btoa('alex:' + password) }; }
+  function parsePayload(row) { try { return JSON.parse(row.payload_json || '{}'); } catch { return {}; } }
+  function text(value) { return value == null || value === '' ? '—' : String(value); }
+  function answerLabel(map, value) { return value == null || value === '' ? '—' : (map[value] || String(value)); }
+  function eventLabel(type) { return ({calculation:'Stima',lead:'Richiesta contatto',email_capture:'Richiesta email'})[type] || text(type); }
+  function recordData(row, payload) {
+    const a = payload.answers || {};
+    const e = payload.estimate || {};
+    const c = payload.contact || {};
+    const u = payload.utm || {};
+    const firstName = c.firstName || (row.full_name && row.full_name !== 'Solo calcolo' ? row.full_name.split(/\s+/)[0] : '');
+    const lastName = c.lastName || (row.full_name && row.full_name !== 'Solo calcolo' ? row.full_name.split(/\s+/).slice(1).join(' ') : '');
+    const states = Array.isArray(a.stato) ? a.stato.map(s => answerLabel(STATES,s)).join(', ') : answerLabel(STATES,a.stato);
+    const detailRows = Array.isArray(e.rows) ? e.rows.map(item => `${item.l || 'Voce'}${item.note ? ` — ${item.note}` : ''}: ${pair(item.v)}`).join('\n') : '—';
+    const data = {
+      id: row.id,
+      createdAt: formatDate(row.created_at),
+      updatedAt: formatDate(row.updated_at),
+      site: row.site === 'tettocondominio' ? 'TettoCondominio' : text(row.site || 'TettoCondominiale'),
+      event: eventLabel(row.event_type),
+      firstName: firstName || (row.full_name === 'Solo calcolo' ? 'Solo calcolo' : '—'),
+      lastName: lastName || '—',
+      email: row.email || c.email || '—',
+      phone: row.phone || c.phone || '—',
+      role: answerLabel(ROLES,a.ruolo),
+      managesMultiple: yesNo(c.managesMultiple),
+      cap: a.cap || payload.cap || '—',
+      city: a.city || a.comune || payload.comune || '—',
+      intervention: answerLabel(INTERVENTIONS,e.intervention || a.intervento),
+      mqDeclared: a.mq,
+      mqUnknown: yesNo(a.mqUnknown),
+      mqEffective: a.mqEffettivi != null ? a.mqEffettivi : e.mq,
+      apartments: a.appartamenti,
+      buildingYear: answerLabel(YEARS,a.anno),
+      state: states,
+      estimate: range(e.low != null ? e.low : e.min,e.high != null ? e.high : e.max),
+      perApartment: range(e.perAptMin,e.perAptMax),
+      works: pair(e.lavori),
+      scaffolding: pair(e.ponteggio),
+      remediation: pair(e.bonifica),
+      fees: pair(e.oneri),
+      vat: pair(e.iva),
+      facade: e.facciataMq,
+      floors: e.piani,
+      asbestos: yesNo(e.amianto != null ? e.amianto : Array.isArray(a.stato) && a.stato.includes('amianto')),
+      region: e.regione,
+      regionFactor: e.coeffRegione,
+      repair: yesNo(e.riparazione),
+      estimateRows: detailRows,
+      leadScore: row.lead_score != null ? row.lead_score : payload.lead_score,
+      privacy: yesNo(row.privacy_accepted != null ? row.privacy_accepted : c.privacyAccepted != null ? c.privacyAccepted : payload.consents && payload.consents.privacy),
+      partner: yesNo(row.partner_accepted != null ? row.partner_accepted : c.partnerAccepted != null ? c.partnerAccepted : payload.consents && payload.consents.trasmissionePartner),
+      consentAt: payload.consents && payload.consents.timestamp,
+      variant: payload.variant,
+      clientTimestamp: payload.client_timestamp,
+      utmSource: u.utm_source,
+      utmMedium: u.utm_medium,
+      utmCampaign: u.utm_campaign,
+      utmTerm: u.utm_term,
+      utmContent: u.utm_content,
+      gclid: u.gclid,
+      fbclid: u.fbclid,
+      page: payload.page,
+      referrer: payload.referrer,
+    };
+    data.rawJson = JSON.stringify({record:{id:row.id,site:row.site,event_type:row.event_type,created_at:row.created_at,updated_at:row.updated_at,full_name:row.full_name,phone:row.phone,email:row.email,lead_score:row.lead_score,privacy_accepted:row.privacy_accepted,partner_accepted:row.partner_accepted},payload},null,2);
+    return data;
+  }
+  function makeCell(value, className = '') {
+    const td = document.createElement('td');
+    if (className) td.className = className;
+    td.textContent = text(value);
+    return td;
+  }
+  function renderRows() {
+    tableBody.replaceChildren();
+    document.getElementById('empty').classList.toggle('hidden', rows.length > 0);
+    for (const row of rows) {
+      const payload = parsePayload(row);
+      const data = recordData(row,payload);
+      const tr = document.createElement('tr');
+      for (const [key] of COLUMNS) {
+        if (key === 'details') {
+          const td = document.createElement('td');
+          const details = document.createElement('details'); details.className = 'details';
+          const summary = document.createElement('summary'); summary.textContent = 'Apri JSON';
+          const pre = document.createElement('pre'); pre.textContent = data.rawJson;
+          details.append(summary,pre); td.append(details); tr.append(td);
+        } else {
+          const multiline = ['state','estimateRows'].includes(key);
+          const estimateCell = ['estimate','perApartment'].includes(key);
+          tr.append(makeCell(data[key],multiline ? 'multiline' : estimateCell ? 'estimate-cell' : ''));
+        }
+      }
+      tableBody.append(tr);
+    }
+    recordCount.textContent = `${rows.length.toLocaleString('it-IT')} record caricati`;
+    loadMoreButton.classList.toggle('hidden', nextOffset == null);
+  }
+  function initializeHeaders() {
+    headerRow.replaceChildren(...COLUMNS.map(([key,label]) => {
+      const th = document.createElement('th'); th.scope = 'col'; th.textContent = label; return th;
+    }));
+  }
+  async function fetchPage(offset = 0, append = false) {
+    archiveMessage.textContent = '';
+    const response = await fetch(`/api/admin/leads?offset=${offset}&limit=100`, {headers:headers(), cache:'no-store'});
+    if (response.status === 401) throw new Error('Password errata o sessione scaduta.');
+    if (!response.ok) throw new Error('Non è stato possibile leggere l’archivio.');
+    const data = await response.json();
+    rows = append ? rows.concat(data.rows || []) : (data.rows || []);
+    nextOffset = data.nextOffset;
+    renderRows();
+  }
+  document.getElementById('login-form').addEventListener('submit', async event => {
+    event.preventDefault();
+    password = passwordInput.value;
+    document.getElementById('login-button').disabled = true;
+    loginMessage.textContent = 'Verifica in corso…';
+    try {
+      await fetchPage(0, false);
+      loginCard.classList.add('hidden'); archive.classList.remove('hidden'); loginMessage.textContent = '';
+    } catch (error) {
+      password = ''; loginMessage.textContent = error.message || 'Accesso non riuscito.'; passwordInput.value = '';
+    } finally { document.getElementById('login-button').disabled = false; }
+  });
+  loadMoreButton.addEventListener('click', async () => {
+    if (nextOffset == null) return;
+    loadMoreButton.disabled = true;
+    try { await fetchPage(nextOffset, true); } catch (error) { archiveMessage.textContent = error.message; }
+    finally { loadMoreButton.disabled = false; }
+  });
+  document.getElementById('logout-button').addEventListener('click', () => {
+    password = ''; rows = []; nextOffset = null; tableBody.replaceChildren();
+    archive.classList.add('hidden'); loginCard.classList.remove('hidden'); passwordInput.value = ''; passwordInput.focus();
+  });
+  exportButton.addEventListener('click', async () => {
+    exportButton.disabled = true; archiveMessage.textContent = 'Preparazione CSV…';
+    try {
+      const all = []; let offset = 0;
+      while (true) {
+        const response = await fetch(`/api/admin/leads?offset=${offset}&limit=1000`, {headers:headers(), cache:'no-store'});
+        if (response.status === 401) throw new Error('Password errata o sessione scaduta.');
+        if (!response.ok) throw new Error('Esportazione non riuscita.');
+        const data = await response.json(); all.push(...(data.rows || []));
+        if (data.nextOffset == null) break;
+        offset = data.nextOffset;
+      }
+      const columns = COLUMNS.map(([,label]) => label);
+      const quote = value => `"${String(value == null ? '' : value).replaceAll('"','""')}"`;
+      const lines = [columns.map(quote).join(';')];
+      for (const row of all) {
+        const data = recordData(row,parsePayload(row));
+        lines.push(COLUMNS.map(([key]) => quote(key === 'details' ? data.rawJson : data[key])).join(';'));
+      }
+      const blob = new Blob(['\ufeff' + lines.join('\r\n')], {type:'text/csv;charset=utf-8'});
+      const url = URL.createObjectURL(blob); const link = document.createElement('a');
+      link.href = url; link.download = `tetto-lead-${new Date().toISOString().slice(0,10)}.csv`; link.click(); URL.revokeObjectURL(url);
+      archiveMessage.className = 'message ok'; archiveMessage.textContent = `${all.length.toLocaleString('it-IT')} record esportati con tutti i campi.`;
+    } catch (error) { archiveMessage.className = 'message error'; archiveMessage.textContent = error.message || 'Esportazione non riuscita.'; }
+    finally { exportButton.disabled = false; }
+  });
+  initializeHeaders();
+})();
+</script>
+</body>
+</html>
+
+
