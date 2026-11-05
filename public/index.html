@@ -149,6 +149,26 @@ input[type=range]{width:100%;height:44px;accent-color:var(--or);cursor:pointer;m
 .cons{display:flex;flex-direction:column;gap:10px;border-top:1px solid #E3E8ED;padding-top:14px}
 .cons .errt{padding-left:34px}
 .okc{display:flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:99px;background:#E3F1E8;color:#1E6B45;font-size:28px;font-weight:800}
+
+/* legal modal */
+dialog.legal-dlg{border:0;padding:0;border-radius:18px;width:min(920px,94vw);height:min(80vh,860px);max-width:none;max-height:none;box-shadow:0 24px 60px rgba(0,0,0,.35)}
+dialog.legal-dlg::backdrop{background:rgba(10,26,40,.62)}
+.legal-dlg .lg-wrap{display:flex;flex-direction:column;height:100%}
+.legal-dlg .lg-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 22px;border-bottom:1px solid #E3E8ED}
+.legal-dlg .lg-head h2{margin:0;font-size:22px;line-height:1.2}
+.legal-dlg .lg-body{flex:1;overflow:auto;padding:18px 22px 28px;font-size:15px;line-height:1.55;color:#33495C}
+.legal-dlg .lg-body h3{margin:18px 0 6px;font-size:16px;color:var(--navy)}
+.legal-dlg .lg-body p,.legal-dlg .lg-body li{margin:0 0 10px}
+.legal-dlg .lg-body ul{padding-left:20px;margin:0 0 10px}
+.legal-dlg .lg-body a{color:var(--or);font-weight:700}
+.legal-dlg .lg-body .meta{color:var(--mut);font-size:13px}
+footer .ft-brand{display:block;max-width:720px;line-height:1.45}
+footer nav button{background:none;border:0;padding:0;color:#fff;font:inherit;font-weight:700;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+@media (max-width:767px){
+  dialog.legal-dlg{width:100vw;height:100dvh;border-radius:0}
+  .legal-dlg .lg-head h2{font-size:18px}
+}
+
 /* cookie + exit */
 .ck{position:fixed;left:12px;right:12px;bottom:12px;z-index:90;max-width:560px;margin-left:auto;background:#fff;border-radius:16px;box-shadow:0 12px 40px rgba(18,48,74,.25);padding:20px;display:flex;flex-direction:column;gap:14px}
 .ck p{margin:0;font-size:14px;line-height:1.5;color:#33495C}
@@ -327,13 +347,21 @@ input[type=range]{width:100%;height:44px;accent-color:var(--or);cursor:pointer;m
 </section>
 </main>
 
-<footer><div class="wrap"><span>TettoCondominiale è un servizio di confronto preventivi, non un'impresa edile. · EMIDA SRL · <a href="mailto:emidavr@gmail.com">emidavr@gmail.com</a></span><nav><a href="privacy.html">Privacy policy</a><a href="cookie-policy.html">Cookie policy</a><a href="#" id="ck-open">Preferenze cookie</a></nav></div></footer>
+<footer><div class="wrap"><span class="ft-brand">Tetto Condominiale — Gestito e supervisionato da EMIDA SRL (P.IVA 05011210233). © 2026 EMIDA SRL. Tutti i diritti riservati.</span><nav aria-label="Informazioni legali"><button type="button" data-legal="privacy">Privacy Policy</button><button type="button" data-legal="cookie">Cookie Policy</button><button type="button" data-legal="termini">Condizioni di servizio</button><a href="#" id="ck-open">Preferenze cookie</a></nav></div></footer>
+
+
+<dialog class="legal-dlg" id="m-legal" aria-labelledby="lg-title">
+  <div class="lg-wrap">
+    <div class="lg-head"><h2 id="lg-title">Informativa</h2><button type="button" class="btn" data-legal-close style="min-height:44px;padding:0 16px;font-size:15px">Chiudi</button></div>
+    <div class="lg-body" id="lg-body"></div>
+  </div>
+</dialog>
 
 <div class="sticky" id="sticky"><button type="button" class="btn btn-lg" data-cta>Calcola la stima →</button></div>
 
 <div class="ck" id="ck" role="dialog" aria-label="Preferenze cookie" hidden>
   <div class="ck-h"><b>Cookie e privacy</b><button type="button" class="x" data-ck="reject" aria-label="Chiudi e rifiuta">✕</button></div>
-  <p>Usiamo la memoria locale del browser per il questionario e le preferenze. In questa versione non è collegato alcun servizio esterno di analytics o marketing. Chiudere questo avviso equivale a rifiutare le categorie facoltative. <a href="cookie-policy.html">Cookie policy</a></p>
+  <p>Usiamo la memoria locale del browser per il questionario e le preferenze. In questa versione non è collegato alcun servizio esterno di analytics o marketing. Chiudere questo avviso equivale a rifiutare le categorie facoltative. <button type="button" data-legal="cookie" style="background:none;border:0;padding:0;color:inherit;font:inherit;font-weight:700;text-decoration:underline;cursor:pointer">Cookie policy</button></p>
   <div class="ck-opts" id="ck-opts" hidden>
     <div><span><b>Necessari</b><small>Sempre attivi</small></span><small>Attivi</small></div>
     <label><span><b>Statistiche</b><small>Non è collegato un servizio esterno in questa versione</small></span><input type="checkbox" id="ck-stat"></label>
@@ -346,13 +374,12 @@ input[type=range]{width:100%;height:44px;accent-color:var(--or);cursor:pointer;m
   <div class="modal-c" role="dialog" aria-label="Richiesta di contatto">
     <div class="ck-h"><h2>Vuoi essere ricontattato?</h2><button type="button" class="x" data-exit-close aria-label="Chiudi">✕</button></div>
     <div id="exit-form-box">
-      <p>Lascia nome e cognome, telefono ed email. I dati restano nell’archivio TettoCondominiale; la condivisione con imprese partner è facoltativa.</p>
+      <p>Lascia nome e cognome, telefono ed email. Con l’invio autorizzi EMIDA SRL a comunicare i tuoi dati a imprese partner e fornitori terzi per preventivi e finalità commerciali collegate (vedi Informativa privacy).</p>
       <form id="exit-form" novalidate style="margin-top:16px">
         <label class="fld">Nome e Cognome<input type="text" id="exit-name" class="inp" autocomplete="name" aria-label="Nome e Cognome" required></label>
         <label class="fld">Telefono<input type="tel" id="exit-phone" class="inp" autocomplete="tel" inputmode="tel" aria-label="Telefono" required></label>
         <label class="fld">Email<input type="email" id="exit-email" class="inp" placeholder="nome@email.it" autocomplete="email" aria-label="Email" required></label>
-        <label class="chk"><input type="checkbox" id="exit-priv"><span>Ho letto la <a href="privacy.html">privacy policy</a> (obbligatorio)</span></label>
-        <label class="chk"><input type="checkbox" id="exit-partner"><span>Acconsento facoltativamente a comunicare i miei dati a imprese partner per ricevere preventivi.</span></label>
+        <label class="chk"><input type="checkbox" id="exit-priv"><span>Ho letto l'<a href="#" data-legal="privacy">Informativa privacy</a> e <b>autorizzo EMIDA SRL</b> a trattare i miei dati e a <b>comunicarli, condividerli e cedere i contatti</b> a imprese edili partner, fornitori terzi e altri operatori per gestire la richiesta di preventivo e per finalità commerciali collegate (obbligatorio).</span></label>
         <span class="errt" id="exit-err" hidden></span>
         <button type="submit" class="btn btn-lg">Invia richiesta</button>
       </form>
@@ -712,17 +739,16 @@ var VARIANT = 'B';
       '<form class="gate" id="gate" novalidate><h3>Richiedi il report e, se vuoi, fino a 3 preventivi dalle imprese della tua zona</h3>' +
       fld('nome', 'Nome e Cognome', 'text', 'name', 'text') + fld('tel', 'Telefono', 'tel', 'tel', 'tel') + fld('email', 'Email', 'email', 'email', 'email') +
       '<label class="chk" style="font-size:15px;padding:6px 0"><input type="checkbox" data-f="multi"' + (c.multi ? ' checked' : '') + '><span>Sono amministratore e gestisco più stabili</span></label>' +
-      '<div class="cons"><label class="chk"><input type="checkbox" id="f-privacy" data-f="privacy"' + (c.privacy ? ' checked' : '') + '><span>Ho letto la <a href="privacy.html" target="_blank" rel="noopener">privacy policy</a> (obbligatorio)</span></label>' + (er.privacy ? '<span class="errt">' + er.privacy + '</span>' : '') +
-      '<label class="chk"><input type="checkbox" id="f-partner" data-f="partner"' + (c.partner ? ' checked' : '') + '><span>Acconsento facoltativamente a comunicare i miei dati a imprese partner per ricevere preventivi.</span></label>' + (er.partner ? '<span class="errt">' + er.partner + '</span>' : '') + '</div>' +
+      '<div class="cons"><label class="chk"><input type="checkbox" id="f-privacy" data-f="privacy"' + (c.privacy ? ' checked' : '') + '><span>Ho letto l\'<a href="#" data-legal="privacy">Informativa privacy</a> e <b>autorizzo EMIDA SRL</b> a trattare i miei dati e a <b>comunicarli, condividerli e cedere i contatti</b> a imprese edili partner, fornitori terzi e altri operatori per gestire la richiesta di preventivo e per finalità commerciali collegate (obbligatorio).</span></label>' + (er.privacy ? '<span class="errt">' + er.privacy + '</span>' : '') + '</div>' +
       '<button type="submit" class="btn btn-lg"' + (st.sending ? ' disabled' : '') + '>' + (st.sending ? 'Invio in corso…' : 'Invia richiesta →') + '</button>' +
       (st.sendErr ? '<span class="errt" style="font-size:14px">' + st.sendErr + '</span>' : '') +
-      '<span class="note">I tuoi contatti restano nell’archivio TettoCondominiale. Non li condividiamo con partner senza il consenso facoltativo.</span></form>';
+      '<span class="note">Inviando la richiesta autorizzi la comunicazione dei contatti a partner e fornitori terzi come indicato nell’Informativa privacy.</span></form>';
   }
   function thanksHTML() {
     var c = st.c;
     return '<span class="okc">✓</span><h2 class="q-title">Richiesta ricevuta, ' + esc(c.nome.trim().split(' ')[0]) + '.</h2>' +
       '<p class="t" style="font-size:17px;color:#33495C">Abbiamo salvato la tua richiesta e i dati di contatto nel pannello TettoCondominiale. In questa versione non sono attive email automatiche.</p>' +
-      (c.partner ? '<p class="t" style="color:#33495C">Hai acconsentito alla comunicazione dei tuoi dati a imprese partner per ricevere preventivi.</p>' : '<p class="t" style="color:#33495C">Non hai acconsentito alla comunicazione dei dati a imprese partner: resteranno nell’archivio TettoCondominiale.</p>') +
+      '<p class="t" style="color:#33495C">Abbiamo registrato il tuo consenso alla comunicazione dei dati a imprese partner e fornitori terzi per preventivi e finalità commerciali collegate.</p>' +
       '<div><button type="button" class="btn btn-o" data-act="restart">Nuova stima per un altro stabile</button></div>';
   }
   function render() { root.innerHTML = st.step < 7 ? quizHTML() : st.step === 7 ? resultHTML() : thanksHTML(); }
@@ -762,7 +788,7 @@ var VARIANT = 'B';
     if (!c.nome.trim()) err.nome = 'Inserisci nome e cognome';
     if (c.tel.replace(/[^\d]/g, '').length < 9) err.tel = 'Inserisci un numero di telefono valido';
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(c.email.trim())) err.email = 'Inserisci un indirizzo email valido';
-    if (!c.privacy) err.privacy = 'Conferma di aver letto la privacy policy';
+    if (!c.privacy) err.privacy = 'Conferma l\'informativa e l\'autorizzazione a comunicare i dati a terzi';
     st.err = err;
     if (Object.keys(err).length) { render(); var f = root.querySelector('.bad, #f-' + Object.keys(err)[0]); f && f.focus(); return; }
     var a = st.a, now = new Date().toISOString();
@@ -770,8 +796,8 @@ var VARIANT = 'B';
       type: 'lead', variant: VARIANT, timestamp: now,
       answers: Object.assign({}, a, { mqEffettivi: TC.effMq(a) }), cap: a.cap, comune: a.comune || null,
       estimate: TC.estimate(a), leadScore: TC.leadScore(a),
-      contact: (function(){ var full=c.nome.trim().replace(/\s+/g,' '); var sp=full.lastIndexOf(' '); var first=sp<0?'':full.slice(0,sp); var last=sp<0?full:full.slice(sp+1); return { firstName: first, lastName: last, fullName: full, phone: c.tel.trim(), email: c.email.trim(), managesMultiple: c.multi, privacyAccepted: true, partnerAccepted: !!c.partner }; })(),
-      consents: { privacy: true, trasmissionePartner: !!c.partner, timestamp: now },
+      contact: (function(){ var full=c.nome.trim().replace(/\s+/g,' '); var sp=full.lastIndexOf(' '); var first=sp<0?'':full.slice(0,sp); var last=sp<0?full:full.slice(sp+1); return { firstName: first, lastName: last, fullName: full, phone: c.tel.trim(), email: c.email.trim(), managesMultiple: c.multi, privacyAccepted: true, partnerAccepted: true }; })(),
+      consents: { privacy: true, trasmissionePartner: true, timestamp: now },
       utm: TC.utm(), page: location.href, referrer: document.referrer || null
     };
     st.sending = true; st.sendErr = ''; render();
@@ -811,6 +837,33 @@ var VARIANT = 'B';
   });
   document.getElementById('ck-open').addEventListener('click', function (e) { e.preventDefault(); ckShow(true); });
 
+
+  /* Legal popups */
+  var LEGAL = {
+    privacy: ['Privacy Policy', '<p><b>Titolare del trattamento:</b> EMIDA SRL – Via Vespucci 3, 37011 Bardolino (VR), P.IVA 05011210233, C.F. 05011210233. Email per diritti e domande: <a href="mailto:emidavr@gmail.com">emidavr@gmail.com</a>.</p><p><b>Servizio:</b> Tetto Condominiale è un portale di EMIDA SRL per il confronto di preventivi relativi al rifacimento/riparazione del tetto condominiale.</p><h3>Quali dati trattiamo</h3><p>Nome e cognome, telefono, email, CAP/comune, ruolo (privato/amministratore), risposte al calcolatore (tipo intervento, mq, appartamenti, stato del tetto, ecc.), stima generata, data/ora della richiesta, URL e parametri campagna (UTM) se presenti, dati tecnici di navigazione strettamente necessari.</p><h3>Perché e su quale base giuridica</h3><p>a) Gestire la richiesta di stima/preventivo e ricontattarti (misure precontrattuali su tua richiesta, art. 6.1.b GDPR); b) obblighi di legge e fiscali ove applicabili (art. 6.1.c); c) sicurezza del sito, prevenzione abusi e tutela del Titolare (legittimo interesse, art. 6.1.f); d) <b>comunicazione e condivisione/cessione dei contatti a imprese edili partner, fornitori terzi e altri operatori</b> per l’evasione della richiesta di preventivo e per finalità commerciali collegate (consenso, art. 6.1.a GDPR), prestato spuntando l’apposita casella obbligatoria all’invio della richiesta; e) solo con consenso separato dal banner cookie: statistiche di navigazione (art. 6.1.a), revocabile in ogni momento.</p><h3>Destinatari e comunicazione a terzi</h3><p><b>Con l’invio della richiesta autorizzi EMIDA SRL a comunicare, condividere e cedere i tuoi dati di contatto e le informazioni relative alla richiesta</b> a: imprese edili e professionisti partner; altri fornitori/provider terzi selezionati per l’evasione della richiesta e per finalità commerciali collegate (es. ricontatto commerciale per offerte di rifacimento/riparazione tetto); fornitori tecnici (hosting Cloudflare, database, CRM come Zoho/Pipedrive, email, notifiche); consulenti fiscali e legali. Tali soggetti agiscono come autonomi titolari o come responsabili del trattamento, secondo i rispettivi ruoli. I dati possono essere utilizzati dai destinatari per contattarti in merito alla richiesta e a proposte commerciali collegate.</p><h3>Trasferimenti fuori UE</h3><p>Alcuni fornitori tecnici (es. CRM/hosting) possono trattare dati fuori dall’UE sulla base di decisioni di adeguatezza, clausole contrattuali standard o, ove previsto, del tuo consenso.</p><h3>Conservazione</h3><p>Richieste e contatti: fino a 24 mesi dalla raccolta, salvo esigenze diverse di tutela legale o obblighi di legge. Dati contrattuali/fiscali (se sorti): 10 anni. Preferenze cookie: fino a 13 mesi o fino a cancellazione dal browser.</p><h3>Diritti</h3><p>Accesso, rettifica, cancellazione, limitazione, opposizione, portabilità e revoca del consenso (senza pregiudicare la liceità del trattamento precedente) scrivendo a <a href="mailto:emidavr@gmail.com">emidavr@gmail.com</a>. Resta fermo il diritto di reclamo al Garante per la protezione dei dati personali (<a href="https://www.garanteprivacy.it/" target="_blank" rel="noopener">garanteprivacy.it</a>).</p><p class="meta">Ultimo aggiornamento: 05/11/2026</p>'],
+    cookie: ['Cookie Policy', '<p><b>Titolare:</b> EMIDA SRL (vedi Privacy Policy).</p><h3>Cookie tecnici / memoria locale (sempre attivi)</h3><p>Servono al funzionamento del calcolatore, a ricordare le risposte incomplete e la scelta sulle preferenze cookie. Non richiedono consenso.</p><h3>Statistiche e marketing (solo con consenso)</h3><p>Se accetti dal banner, possono essere attivati strumenti di misurazione visite e, se configurati, strumenti di marketing. In assenza di consenso restano disattivati. Puoi cambiare scelta dal link «Preferenze cookie» nel footer.</p><h3>Terze parti tecniche</h3><p>Il sito può caricare font da Google Fonts e usa Cloudflare per hosting/CDN/database. Questi soggetti possono trattare dati tecnici di connessione (es. IP) secondo le proprie informative.</p><p class="meta">Ultimo aggiornamento: 05/11/2026</p>'],
+    termini: ['Condizioni di servizio', '<h3>Dati del soggetto erogatore</h3><p><b>EMIDA SRL</b> – Via Vespucci 3, 37011 Bardolino (VR).<br>P.IVA / C.F. 05011210233.<br>Email: <a href="mailto:emidavr@gmail.com">emidavr@gmail.com</a>.</p><h3>Natura del servizio TettoCondominiale</h3><p>Tetto Condominiale è un portale informativo e di intermediazione/confronto preventivi gestito da EMIDA SRL. <b>Non è un’impresa edile</b> e non esegue direttamente i lavori di rifacimento o riparazione del tetto.</p><h3>Stime e preventivi</h3><ul><li>Le stime online sono indicative e non vincolanti; il preventivo reale richiede sopralluogo e capitolato da parte delle imprese.</li><li>Inviando la richiesta, l’utente chiede di essere ricontattato e autorizza la comunicazione/condivisione/cessione dei contatti a imprese partner e fornitori terzi per l’evasione della richiesta e finalità commerciali collegate, come descritto nell’Informativa privacy.</li><li>EMIDA SRL non garantisce tempi, prezzi o esito dei lavori delle imprese terze; il rapporto contrattuale sui lavori, se sorto, è tra utente e impresa selezionata.</li><li>È vietato usare il sito per scopi illeciti o per inserire dati di terzi senza titolo.</li></ul><h3>Limitazione di responsabilità</h3><p>Nei limiti di legge, EMIDA SRL non risponde di danni derivanti da interruzioni del sito, stime indicative, o da condotte di imprese/fornitori terzi destinatari dei lead.</p><h3>Legge applicabile</h3><p>Diritto italiano. Foro competente: quello previsto dalla normativa a tutela del consumatore, ove applicabile; altrimenti Tribunale di Verona.</p><p class="meta">Ultimo aggiornamento: 05/11/2026</p>']
+  };
+  function openLegal(k) {
+    var d = document.getElementById('m-legal');
+    if (!LEGAL[k] || !d) return;
+    document.getElementById('lg-title').textContent = LEGAL[k][0];
+    document.getElementById('lg-body').innerHTML = LEGAL[k][1];
+    document.getElementById('lg-body').scrollTop = 0;
+    if (typeof d.showModal === 'function') d.showModal(); else d.setAttribute('open','');
+  }
+  document.addEventListener('click', function (ev) {
+    if (ev.target.closest('[data-legal-close]')) {
+      var d = document.getElementById('m-legal');
+      if (d && d.open) d.close();
+      return;
+    }
+    var t = ev.target.closest('[data-legal]');
+    if (t) { ev.preventDefault(); openLegal(t.getAttribute('data-legal')); }
+  });
+  var ml = document.getElementById('m-legal');
+  if (ml) ml.addEventListener('click', function (e) { if (e.target === ml) ml.close(); });
+
   /* Exit intent (solo desktop) */
   var exitM = document.getElementById('exit'), t0 = Date.now();
   document.addEventListener('mouseout', function (e) {
@@ -834,14 +887,14 @@ var VARIANT = 'B';
     if (!full) return fail('Inserisci nome e cognome');
     if (ph.replace(/[^\d]/g, '').length < 9) return fail('Inserisci un numero di telefono valido');
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em)) return fail('Inserisci un indirizzo email valido');
-    if (!document.getElementById('exit-priv').checked) return fail('Conferma di aver letto la privacy policy');
-    var a = st.a, has = !!a.intervento, partner = document.getElementById('exit-partner').checked, now = new Date().toISOString();
+    if (!document.getElementById('exit-priv').checked) return fail('Conferma l\'informativa e l\'autorizzazione a comunicare i dati a terzi');
+    var a = st.a, has = !!a.intervento, now = new Date().toISOString();
     var payload = {
       type: 'lead', variant: VARIANT, timestamp: now,
       answers: has ? a : {}, estimate: has ? TC.estimate(a) : {},
       leadScore: has ? TC.leadScore(a) : 0, cap: a.cap || null, comune: a.comune || null,
-      contact: { firstName: fn, lastName: ln, fullName: full, phone: ph, email: em, privacyAccepted: true, partnerAccepted: partner },
-      consents: { privacy: true, trasmissionePartner: partner, timestamp: now },
+      contact: { firstName: fn, lastName: ln, fullName: full, phone: ph, email: em, privacyAccepted: true, partnerAccepted: true },
+      consents: { privacy: true, trasmissionePartner: true, timestamp: now },
       utm: TC.utm(), page: location.href, referrer: document.referrer || null
     };
     TC.post(payload)
