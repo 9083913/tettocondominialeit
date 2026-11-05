@@ -72,12 +72,12 @@ p.t{margin:0;font-size:16px;line-height:1.6;color:var(--ink2)}
 .caso .ph img{width:100%;height:100%;object-fit:cover;display:block}
 .caso small{font-size:13px;color:var(--mut);display:block}.caso b{font-size:18px}
 .faq{--min:460px;--gap:10px;align-items:start}
-details{background:#fff;border-radius:14px;border:1px solid var(--line)}
-details[open]{border-color:var(--or)}
-summary{display:flex;justify-content:space-between;align-items:center;gap:14px;min-height:64px;padding:16px 18px;font-size:17px;font-weight:700;cursor:pointer;list-style:none}
-summary::-webkit-details-marker{display:none}
-summary::after{content:'+';flex:none;font-size:22px;color:var(--or)}details[open] summary::after{content:'−'}
-details p{margin:0;padding:0 18px 20px;font-size:15px;line-height:1.65;color:var(--ink2)}
+.faq details{background:#fff;border-radius:14px;border:1px solid var(--line)}
+.faq details[open]{border-color:var(--or)}
+.faq summary{display:flex;justify-content:space-between;align-items:center;gap:14px;min-height:64px;padding:16px 18px;font-size:17px;font-weight:700;cursor:pointer;list-style:none}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:'+';flex:none;font-size:22px;color:var(--or)}.faq details[open] summary::after{content:'−'}
+.faq details p{margin:0;padding:0 18px 20px;font-size:15px;line-height:1.65;color:var(--ink2)}
 footer{background:var(--navy);color:#C8D6E2;font-size:14px}
 footer .wrap{padding-top:32px;padding-bottom:40px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px}
 footer nav{display:flex;flex-wrap:wrap;gap:18px}footer a{color:#fff}
@@ -154,8 +154,8 @@ input[type=range]{width:100%;height:44px;accent-color:var(--or);cursor:pointer;m
   .top{padding-top:12px}.logo{font-size:17px}.top small{display:none}
   .hero-grid{gap:14px;padding-top:18px;padding-bottom:20px}
   .hero-txt{display:contents}
-  h1{order:1;font-size:clamp(27px,8vw,34px);line-height:1.08;letter-spacing:-.02em}
-  .sub{order:2;font-size:16px;line-height:1.45}
+  h1{order:1;font-size:clamp(20px,5.4vw,26px);line-height:1.12;letter-spacing:-.02em;max-width:none}
+  .sub{order:2;font-size:clamp(12px,3.3vw,14px);line-height:1.35;max-width:none}
   .hero-txt .cta-box{display:none}
   .card{order:3;padding:16px 14px 18px;border-radius:16px;box-shadow:0 12px 30px rgba(0,0,0,.25)}
   .checks{order:4;margin-top:4px;padding-top:16px;gap:10px}.checks div{font-size:15px}
@@ -167,7 +167,7 @@ input[type=range]{width:100%;height:44px;accent-color:var(--or);cursor:pointer;m
   .adm{padding:22px 16px;border-radius:18px;gap:24px}
   .btn{width:100%;min-height:54px;font-size:17px;padding:0 18px}
   .row-cta{flex-direction:column;align-items:stretch;text-align:center}
-  summary{font-size:16px;padding:14px 16px;min-height:58px}details p{padding:0 16px 18px}
+  .faq summary{font-size:16px;padding:14px 16px;min-height:58px}.faq details p{padding:0 16px 18px}
   footer .wrap{flex-direction:column;padding-bottom:28px}
   .q{gap:16px}
   .q-head{min-height:40px}.q-back{font-size:14px;padding:8px 2px}
@@ -188,12 +188,16 @@ input[type=range]{width:100%;height:44px;accent-color:var(--or);cursor:pointer;m
 }
 
 .br-m{display:none}
-.est-det{margin-top:4px;border-top:1px solid rgba(255,255,255,.12);padding-top:8px}
-.est-det summary{cursor:pointer;font-size:14px;font-weight:700;color:#C8D6E2;list-style:none;padding:6px 0;user-select:none}
+.est-det{margin-top:4px;border:0;border-top:1px solid rgba(255,255,255,.18);border-radius:0;padding-top:8px;background:transparent;color:#fff}
+.est-det summary{display:block;cursor:pointer;font-size:14px;font-weight:700;color:#E8EEF4;list-style:none;padding:8px 0;min-height:0;user-select:none}
 .est-det summary::-webkit-details-marker{display:none}
-.est-det summary::after{content:' ▾'; opacity:.7}
+.est-det summary::after{content:' ▾';color:#E8EEF4;opacity:.85;font-size:14px}
 .est-det[open] summary::after{content:' ▴'}
-.est-det .rows{margin-top:4px}
+.est-det .rows{margin-top:4px;border-top:0}
+.est-det .rw{color:#fff;border-bottom-color:rgba(255,255,255,.18)}
+.est-det .rw b{color:#fff}
+.est-det .rw small{color:#D7E2EC}
+.est-det .rw > span:last-child{color:#fff}
 @media (max-width:1100px){
   .hero-grid{--min:100%;--gap:20px}
   .est{padding:16px 14px;gap:8px}
@@ -205,12 +209,15 @@ input[type=range]{width:100%;height:44px;accent-color:var(--or);cursor:pointer;m
   .disc{font-size:12px;line-height:1.35}
 }
 @media (max-width:767px){
-  .br-m{display:inline}
-  h1{font-size:clamp(26px,7.2vw,32px);line-height:1.12;max-width:16ch}
-  .sub{font-size:15px;line-height:1.35;max-width:34ch}
+  .br-m{display:none}
+  h1{font-size:clamp(20px,5.4vw,26px);line-height:1.12;max-width:none;letter-spacing:-.02em}
+  h1 .hl{display:block;white-space:nowrap}
+  .sub{font-size:clamp(12px,3.3vw,14px);line-height:1.35;max-width:none;color:#E1E9F0}
+  .sub .hl{display:block;white-space:nowrap}
   .est{gap:8px;padding:14px 12px}
   .rw{padding:6px 0}
   .rw small{display:none}
+  .est-det summary{color:#E8EEF4}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
@@ -223,8 +230,8 @@ input[type=range]{width:100%;height:44px;accent-color:var(--or);cursor:pointer;m
   <div class="wrap top"><div class="logo"><i></i>TettoCondominiale</div><small>3 imprese verificate a confronto</small></div>
   <div class="wrap grid hero-grid">
     <div class="hero-txt">
-      <h1>Quanto costa rifare il tetto<br class="br-m"> del tuo condominio?</h1>
-      <p class="sub">Stima indicativa in 60 secondi.<br class="br-m"> Poi fino a 3 preventivi gratuiti da imprese verificate della tua zona.</p>
+      <h1><span class="hl">Quanto costa rifare il tetto</span><br class="br-m"><span class="hl">del tuo condominio?</span></h1>
+      <p class="sub"><span class="hl">Stima indicativa in 60 secondi.</span><br class="br-m"><span class="hl">Poi fino a 3 preventivi gratuiti da imprese verificate della tua zona.</span></p>
       <div class="cta-box">
         <button type="button" class="btn btn-lg" data-cta>Calcola la stima →</button>
         <span class="trust">Gratuito · Nessun obbligo · Dati non venduti a terzi senza consenso</span>
