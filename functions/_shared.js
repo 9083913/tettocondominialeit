@@ -6,7 +6,7 @@ const SITE_BY_HOST = {
   "www.tettocondominiale.it": "tettocondominiale",
 };
 
-// Sites whose leads are queued for CRM sync (zoho_outbox; cron adds pipedrive_outbox).
+// Sites whose leads are queued for CRM sync (zoho_outbox + pipedrive_outbox; Workers cron retries).
 export const CRM_SITES = new Set(["tettochiaro", "preventivotetto", "tettocondominiale", "puliziecondominialiverona"]);
 
 export function json(data, status = 200) {
@@ -175,8 +175,9 @@ export async function capture(request, env, eventType, ctx) {
         "INSERT INTO lead_records (id, site, event_type, created_at, updated_at, full_name, phone, email, lead_score, privacy_accepted, partner_accepted, payload_json) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT(id) DO UPDATE SET event_type = excluded.event_type, updated_at = excluded.updated_at, full_name = excluded.full_name, phone = excluded.phone, email = excluded.email, lead_score = excluded.lead_score, privacy_accepted = excluded.privacy_accepted, partner_accepted = excluded.partner_accepted, payload_json = excluded.payload_json"
       ).bind(id, site, eventType, now, now, eventType === "lead" ? fullName : null, eventType === "lead" ? phone : null, email, score, privacyAccepted ? 1 : 0, partnerAccepted ? 1 : 0, payloadJson);
       if (eventType === "lead" && CRM_SITES.has(site)) {
-        const outboxWrite = env.LEADS_DB.prepare("INSERT OR IGNORE INTO zoho_outbox(lead_id,state,attempts,next_attempt_at,created_at,updated_at) VALUES(?,'pending',0,?,?,?)").bind(id, now, now, now);
-        await env.LEADS_DB.batch([leadWrite, outboxWrite]);
+        const zohoOutbox = env.LEADS_DB.prepare("INSERT OR IGNORE INTO zoho_outbox(lead_id,state,attempts,next_attempt_at,created_at,updated_at) VALUES(?,'pending',0,?,?,?)").bind(id, now, now, now);
+        const pipedriveOutbox = env.LEADS_DB.prepare("INSERT OR IGNORE INTO pipedrive_outbox(lead_id,state,attempts,next_attempt_at,created_at,updated_at) VALUES(?,'pending',0,?,?,?)").bind(id, now, now, now);
+        await env.LEADS_DB.batch([leadWrite, zohoOutbox, pipedriveOutbox]);
       } else {
         await leadWrite.run();
       }

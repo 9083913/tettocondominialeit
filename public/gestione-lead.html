@@ -16,7 +16,7 @@
 <body>
   <main class="wrap">
     <header class="top">
-      <div><div class="brand"><span>Tetto</span> · Archivio</div><h1 class="title">Stime e richieste TettoCondominiale</h1><p class="sub">Archivio riservato di questo sito. I dati si caricano solo dopo l’accesso.</p><p class="sub">I lead vengono salvati qui. Il pannello non invia notifiche email automatiche.</p></div>
+      <div><div class="brand"><span>Tetto</span> · Archivio</div><h1 class="title">Stime e richieste — archivio unificato</h1><p class="sub">Lead di TettoCondominiale, PreventivoTetto e gli altri siti (filtro sotto). Host: TettoCondominiale.</p><p class="sub">I lead vengono salvati qui. Il pannello non invia notifiche email automatiche.</p></div>
     </header>
 
     <section id="login-card" class="card auth" aria-labelledby="login-title">
@@ -32,6 +32,18 @@
 
     <section id="archive" class="hidden" aria-live="polite">
       <div class="toolbar">
+        <div class="btn-row" style="align-items:center">
+          <label class="label" for="site-filter" style="margin:0">Siti</label>
+          <select id="site-filter" style="padding:10px 12px;border:1px solid #cbd6de;border-radius:10px;font:inherit">
+            <option value="all" selected>Tutti i siti</option>
+            <option value="roof">Solo tetto (TettoCondominiale + PreventivoTetto)</option>
+            <option value="tettocondominiale">TettoCondominiale</option>
+            <option value="preventivotetto">PreventivoTetto</option>
+            <option value="tettochiaro">TettoChiaro</option>
+            <option value="puliziecondominialiverona">PulizieCondominialiVerona</option>
+            <option value="host">Solo questo host</option>
+          </select>
+        </div>
         <p id="record-count" class="status">Caricamento archivio…</p>
         <div class="btn-row"><button id="export-button" type="button">Esporta tutto in CSV</button><button id="logout-button" class="secondary" type="button">Esci</button></div>
       </div>
@@ -179,9 +191,12 @@
       const th = document.createElement('th'); th.scope = 'col'; th.textContent = label; return th;
     }));
   }
+  let siteFilter = 'all';
+  const siteFilterEl = document.getElementById('site-filter');
   async function fetchPage(offset = 0, append = false) {
     archiveMessage.textContent = '';
-    const response = await fetch(`/api/admin/leads?offset=${offset}&limit=100`, {headers:headers(), cache:'no-store'});
+    const sites = encodeURIComponent(siteFilterEl ? siteFilterEl.value : siteFilter);
+    const response = await fetch(`/api/admin/leads?sites=${sites}&offset=${offset}&limit=100`, {headers:headers(), cache:'no-store'});
     if (response.status === 401) throw new Error('Password errata o sessione scaduta.');
     if (!response.ok) throw new Error('Non è stato possibile leggere l’archivio.');
     const data = await response.json();
@@ -216,7 +231,8 @@
     try {
       const all = []; let offset = 0;
       while (true) {
-        const response = await fetch(`/api/admin/leads?offset=${offset}&limit=1000`, {headers:headers(), cache:'no-store'});
+        const sites = encodeURIComponent(siteFilterEl ? siteFilterEl.value : siteFilter);
+        const response = await fetch(`/api/admin/leads?sites=${sites}&offset=${offset}&limit=1000`, {headers:headers(), cache:'no-store'});
         if (response.status === 401) throw new Error('Password errata o sessione scaduta.');
         if (!response.ok) throw new Error('Esportazione non riuscita.');
         const data = await response.json(); all.push(...(data.rows || []));
@@ -238,6 +254,11 @@
     finally { exportButton.disabled = false; }
   });
   initializeHeaders();
+  if (siteFilterEl) {
+    siteFilterEl.addEventListener('change', async () => {
+      try { await fetchPage(0, false); } catch (error) { archiveMessage.textContent = error.message; }
+    });
+  }
 })();
 </script>
 </body>
