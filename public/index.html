@@ -172,17 +172,25 @@ footer nav button{background:none;border:0;padding:0;color:#fff;font:inherit;fon
   .legal-dlg .lg-head h2{font-size:18px}
 }
 
-/* cookie + exit */
-.ck{position:fixed;right:12px;bottom:12px;left:auto;z-index:90;width:min(340px,calc(100vw - 24px));max-width:340px;margin:0;background:#fff;border-radius:12px;box-shadow:0 10px 28px rgba(18,48,74,.22);padding:12px 12px 10px;display:flex;flex-direction:column;gap:8px}
-.ck p{margin:0;font-size:12px;line-height:1.4;color:#33495C}
-.ck-h{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}.ck-h b{font-size:13px;line-height:1.25}
-.x{flex:none;width:28px;height:28px;border-radius:99px;border:1px solid #D5DDE4;background:#fff;cursor:pointer;font-size:12px;line-height:1;padding:0}
-.ck-opts{border-top:1px solid #E3E8ED}
-.ck-opts label,.ck-opts div{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid #E3E8ED;font-size:12px;cursor:pointer}
-.ck-opts small{display:block;font-size:11px;color:var(--mut)}.ck-opts input{width:16px;height:16px;accent-color:var(--navy)}
-.ck-btns{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
-.ck-btns button{min-height:34px;border-radius:8px;border:1.5px solid var(--navy);background:#fff;font-size:11px;font-weight:800;cursor:pointer;padding:0 4px;line-height:1.15}
-.ck-btns .solid{background:var(--navy);color:#fff}
+/* cookie + exit — bottom-right compact card, large readable UI */
+.ck{position:fixed;right:16px;bottom:16px;left:auto;z-index:90;width:min(420px,calc(100vw - 28px));max-width:420px;margin:0;background:#F3F6F9;border:1px solid #D8E0E8;border-radius:18px;box-shadow:0 16px 40px rgba(18,48,74,.22);padding:18px 18px 16px;display:flex;flex-direction:column;gap:12px}
+.ck p{margin:0;font-size:14px;line-height:1.5;color:#33495C}
+.ck-h{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}.ck-h b{font-size:17px;line-height:1.25;color:var(--navy);font-weight:800}
+.x{flex:none;width:36px;height:36px;border-radius:99px;border:1.5px solid #C9D3DD;background:#fff;cursor:pointer;font-size:14px;line-height:1;padding:0;color:var(--navy)}
+.x:hover{background:#EEF2F6}
+.ck-opts{border-top:1px solid #D8E0E8;padding-top:4px}
+.ck-opts label,.ck-opts div{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #D8E0E8;font-size:14px;cursor:pointer}
+.ck-opts small{display:block;font-size:12px;color:var(--mut);margin-top:2px}.ck-opts input{width:18px;height:18px;accent-color:var(--navy);flex:none}
+.ck-btns{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.ck-btns button{min-height:46px;border-radius:12px;border:2px solid var(--navy);background:#fff;color:var(--navy);font-size:14px;font-weight:800;cursor:pointer;padding:0 8px;line-height:1.15}
+.ck-btns button:hover{background:#EEF2F6}
+.ck-btns .solid{background:var(--navy);color:#fff;border-color:var(--navy)}
+.ck-btns .solid:hover{background:#0E2740;color:#fff}
+@media (max-width:480px){
+  .ck{right:10px;bottom:10px;width:calc(100vw - 20px);max-width:none;padding:16px 14px 14px;border-radius:16px}
+  .ck-btns{grid-template-columns:1fr;gap:8px}
+  .ck-btns button{min-height:48px;font-size:15px}
+}
 .modal{position:fixed;inset:0;z-index:95;background:rgba(10,26,40,.62);display:flex;align-items:center;justify-content:center;padding:20px}
 .modal-c{width:100%;max-width:460px;max-height:90vh;overflow:auto;background:#fff;border-radius:18px;padding:28px;display:flex;flex-direction:column;gap:16px;box-shadow:0 24px 60px rgba(0,0,0,.3)}
 .modal-c h2{font-size:26px}.modal-c p{margin:0;font-size:16px;line-height:1.5;color:#33495C}
@@ -399,12 +407,12 @@ footer nav button{background:none;border:0;padding:0;color:#fff;font:inherit;fon
   <div class="modal-c" role="dialog" aria-label="Richiesta di contatto">
     <div class="ck-h"><h2>Vuoi essere ricontattato?</h2><button type="button" class="x" data-exit-close aria-label="Chiudi">✕</button></div>
     <div id="exit-form-box">
-      <p>Lascia nome e cognome, telefono ed email. Con l’invio autorizzi EMIDA SRL a comunicare i tuoi dati a imprese partner e fornitori terzi per preventivi e finalità commerciali collegate (vedi Informativa privacy).</p>
+      <p>Lascia nome e cognome, telefono ed email. Con l’invio autorizzi la società a comunicare i tuoi dati a imprese partner e fornitori terzi per preventivi e finalità commerciali collegate (vedi Informativa privacy).</p>
       <form id="exit-form" novalidate style="margin-top:16px">
         <label class="fld">Nome e Cognome<input type="text" id="exit-name" class="inp" autocomplete="name" aria-label="Nome e Cognome" required></label>
         <label class="fld">Telefono<input type="tel" id="exit-phone" class="inp" autocomplete="tel" inputmode="tel" aria-label="Telefono" required></label>
         <label class="fld">Email<input type="email" id="exit-email" class="inp" placeholder="nome@email.it" autocomplete="email" aria-label="Email" required></label>
-        <label class="chk"><input type="checkbox" id="exit-priv"><span>Ho letto l'<a href="#" data-legal="privacy">Informativa privacy</a> e <b>autorizzo EMIDA SRL</b> a trattare i miei dati e a <b>comunicarli, condividerli e cedere i contatti</b> a imprese edili partner, fornitori terzi e altri operatori per gestire la richiesta di preventivo e per finalità commerciali collegate (obbligatorio).</span></label>
+        <label class="chk"><input type="checkbox" id="exit-priv"><span>Ho letto l'<a href="#" data-legal="privacy">Informativa privacy</a> e <b>autorizzo la società e le società del gruppo</b> a trattare i miei dati e a <b>comunicarli, condividerli e cedere i contatti</b> a imprese partner e fornitori terzi per preventivi e finalità commerciali collegate (obbligatorio).</span></label>
         <span class="errt" id="exit-err" hidden></span>
         <button type="submit" class="btn btn-lg">Invia richiesta</button>
       </form>
@@ -764,7 +772,7 @@ var VARIANT = 'B';
       '<form class="gate" id="gate" novalidate><h3>Richiedi il report e, se vuoi, fino a 3 preventivi dalle imprese della tua zona</h3>' +
       fld('nome', 'Nome e Cognome', 'text', 'name', 'text') + fld('tel', 'Telefono', 'tel', 'tel', 'tel') + fld('email', 'Email', 'email', 'email', 'email') +
       '<label class="chk" style="font-size:15px;padding:6px 0"><input type="checkbox" data-f="multi"' + (c.multi ? ' checked' : '') + '><span>Sono amministratore e gestisco più stabili</span></label>' +
-      '<div class="cons"><label class="chk"><input type="checkbox" id="f-privacy" data-f="privacy"' + (c.privacy ? ' checked' : '') + '><span>Ho letto l\'<a href="#" data-legal="privacy">Informativa privacy</a> e <b>autorizzo EMIDA SRL</b> a trattare i miei dati e a <b>comunicarli, condividerli e cedere i contatti</b> a imprese edili partner, fornitori terzi e altri operatori per gestire la richiesta di preventivo e per finalità commerciali collegate (obbligatorio).</span></label>' + (er.privacy ? '<span class="errt">' + er.privacy + '</span>' : '') + '</div>' +
+      '<div class="cons"><label class="chk"><input type="checkbox" id="f-privacy" data-f="privacy"' + (c.privacy ? ' checked' : '') + '><span>Ho letto l\'<a href="#" data-legal="privacy">Informativa privacy</a> e <b>autorizzo la società e le società del gruppo</b> a trattare i miei dati e a <b>comunicarli, condividerli e cedere i contatti</b> a imprese partner e fornitori terzi per preventivi e finalità commerciali collegate (obbligatorio).</span></label>' + (er.privacy ? '<span class="errt">' + er.privacy + '</span>' : '') + '</div>' +
       '<button type="submit" class="btn btn-lg"' + (st.sending ? ' disabled' : '') + '>' + (st.sending ? 'Invio in corso…' : 'Invia richiesta →') + '</button>' +
       (st.sendErr ? '<span class="errt" style="font-size:14px">' + st.sendErr + '</span>' : '') +
       '<span class="note">Inviando la richiesta autorizzi la comunicazione dei contatti a partner e fornitori terzi come indicato nell’Informativa privacy.</span></form>';
@@ -889,17 +897,40 @@ var VARIANT = 'B';
   var ml = document.getElementById('m-legal');
   if (ml) ml.addEventListener('click', function (e) { if (e.target === ml) ml.close(); });
 
-  /* Exit intent (solo desktop) */
+  /* Lead popup: exit-intent (desktop) + timer 90s; respect dismiss/submit localStorage */
   var exitM = document.getElementById('exit'), t0 = Date.now();
+  var EXIT_DISMISS_KEY = 'tc_exit_dismissed_v1';
+  var EXIT_DELAY_MS = 90000;
+  function exitDismissed() { try { return !!localStorage.getItem(EXIT_DISMISS_KEY); } catch (e) { return false; } }
+  function markExitDismissed() { try { localStorage.setItem(EXIT_DISMISS_KEY, String(Date.now())); } catch (e) {} }
+  function canShowExit() {
+    if (!exitM || !exitM.hidden) return false;
+    if (exitDismissed() || TC.leadSent() || st.step >= 7) return false;
+    return true;
+  }
+  function showExit(reason) {
+    if (!canShowExit()) return;
+    try { localStorage.setItem('tc_exit_shown_v1', String(Date.now())); } catch (e) {}
+    exitM.hidden = false;
+    TC.track('exit_intent_mostrato', { reason: reason || 'unknown' });
+    setTimeout(function () { var n = document.getElementById('exit-name'); n && n.focus(); }, 50);
+  }
+  function hideExit(persist) {
+    if (!exitM) return;
+    exitM.hidden = true;
+    if (persist) markExitDismissed();
+  }
   document.addEventListener('mouseout', function (e) {
     if (e.clientY > 0 || e.relatedTarget) return;
     if (window.innerWidth < 1024 || !matchMedia('(pointer:fine)').matches) return;
-    if (Date.now() - t0 < 5000 || sessionStorage.getItem('tc_exit_shown') || TC.leadSent() || st.step >= 7) return;
-    sessionStorage.setItem('tc_exit_shown', '1'); exitM.hidden = false; TC.track('exit_intent_mostrato');
-    setTimeout(function () { document.getElementById('exit-name').focus(); }, 50);
+    if (Date.now() - t0 < 15000) return;
+    showExit('exit_intent');
   });
-  exitM.addEventListener('click', function (e) { if (e.target === exitM || e.target.closest('[data-exit-close]')) exitM.hidden = true; });
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') exitM.hidden = true; });
+  setTimeout(function () { showExit('timer_90s'); }, EXIT_DELAY_MS);
+  exitM.addEventListener('click', function (e) {
+    if (e.target === exitM || e.target.closest('[data-exit-close]')) hideExit(true);
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && exitM && !exitM.hidden) hideExit(true); });
   document.getElementById('exit-form').addEventListener('submit', function (e) {
     e.preventDefault();
     var full = document.getElementById('exit-name').value.trim().replace(/\s+/g, ' ');
