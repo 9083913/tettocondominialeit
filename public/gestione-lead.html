@@ -1,268 +1,43 @@
-
-<!doctype html>
-<html lang="it">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex,nofollow">
-  <meta name="theme-color" content="#12304A">
-  <title>Archivio stime e richieste</title>
-  <style>
-    :root{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#172b3a;background:#f4f7f9;font-synthesis:none;text-rendering:optimizeLegibility}
-    *{box-sizing:border-box}body{margin:0}.wrap{max-width:1400px;margin:0 auto;padding:24px 16px 56px}.top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin:8px 0 24px}.brand{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#c46d2c}.brand span{color:#12304a}.title{margin:8px 0 4px;font-size:clamp(25px,5vw,36px);letter-spacing:-.04em}.sub{margin:0;color:#60717e;line-height:1.5}.card{background:white;border:1px solid #dde5ea;border-radius:16px;padding:20px;box-shadow:0 8px 24px #12304a0a}.auth{max-width:440px;margin:42px auto}.label{display:block;font-size:14px;font-weight:650;margin:18px 0 8px}input{width:100%;padding:13px 14px;border:1px solid #cbd6de;border-radius:10px;font:inherit}button{border:0;border-radius:10px;padding:12px 16px;background:#12304a;color:white;font:inherit;font-weight:700;cursor:pointer}button:disabled{opacity:.55;cursor:wait}.btn-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.secondary{background:#e9eff3;color:#17364c}.auth button{width:100%;margin-top:14px}.message{min-height:22px;margin:12px 0 0;color:#a23d30;font-size:14px}.hidden{display:none!important}.toolbar{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin:20px 0}.status{font-size:14px;color:#60717e}.scroll-hint{margin:0 0 10px;color:#60717e;font-size:13px}.table-wrap{overflow:auto;border:1px solid #dde5ea;border-radius:12px;background:#fff;max-width:100%;overscroll-behavior-x:contain}table{width:max-content;min-width:100%;border-collapse:separate;border-spacing:0;table-layout:auto}th,td{text-align:left;padding:11px 12px;border-bottom:1px solid #edf1f4;vertical-align:top;font-size:12px;white-space:nowrap}th{background:#f7f9fa;color:#455967;font-size:11px;text-transform:uppercase;letter-spacing:.04em;position:sticky;top:0;z-index:1}tbody tr:hover{background:#fbfcfd}td strong{display:block;color:#18364c}td small{display:block;color:#667985;margin-top:4px;overflow-wrap:anywhere}.pill{display:inline-block;background:#edf3f6;border-radius:99px;padding:4px 8px;color:#27465b;font-size:12px;font-weight:650}.multiline{white-space:pre-line;min-width:240px;max-width:360px;overflow-wrap:anywhere}.estimate-cell{white-space:nowrap;font-weight:700;color:#17364c;font-variant-numeric:tabular-nums}.details summary{cursor:pointer;color:#345a72}.details pre{white-space:pre-wrap;word-break:break-word;min-width:300px;max-width:600px;max-height:250px;overflow:auto;font-size:11px;background:#f6f8f9;padding:10px;border-radius:8px}.footer{color:#71818b;font-size:12px;line-height:1.5;margin:16px 2px}.empty{padding:30px;text-align:center;color:#657984}.error{color:#a23d30}.ok{color:#24724a}
-    @media(max-width:600px){.wrap{padding:18px 12px 40px}.top{display:block}.card{padding:17px}.toolbar{align-items:stretch}.toolbar .btn-row{width:100%}.toolbar button{flex:1}.table-wrap{border-radius:10px}}
-  </style>
-</head>
-<body>
-  <main class="wrap">
-    <header class="top">
-      <div><div class="brand"><span>Tetto</span> · Archivio</div><h1 class="title">Stime e richieste — archivio unificato</h1><p class="sub">Lead di TettoCondominiale, PreventivoTetto e gli altri siti (filtro sotto). Host: TettoCondominiale.</p><p class="sub">I lead vengono salvati qui. Il pannello non invia notifiche email automatiche.</p></div>
-    </header>
-
-    <section id="login-card" class="card auth" aria-labelledby="login-title">
-      <h2 id="login-title">Accesso riservato</h2>
-      <p class="sub">Inserisci la password di gestione per vedere i dati ed esportarli.</p>
-      <form id="login-form">
-        <label class="label" for="password">Password</label>
-        <input id="password" type="password" autocomplete="current-password" required>
-        <button id="login-button" type="submit">Accedi</button>
-      </form>
-      <p id="login-message" class="message" role="status" aria-live="polite"></p>
-    </section>
-
-    <section id="archive" class="hidden" aria-live="polite">
-      <div class="toolbar">
-        <div class="btn-row" style="align-items:center">
-          <label class="label" for="site-filter" style="margin:0">Siti</label>
-          <select id="site-filter" style="padding:10px 12px;border:1px solid #cbd6de;border-radius:10px;font:inherit">
-            <option value="all" selected>Tutti i siti</option>
-            <option value="roof">Solo tetto (TettoCondominiale + PreventivoTetto)</option>
-            <option value="tettocondominiale">TettoCondominiale</option>
-            <option value="preventivotetto">PreventivoTetto</option>
-            <option value="tettochiaro">TettoChiaro</option>
-            <option value="puliziecondominialiverona">PulizieCondominialiVerona</option>
-            <option value="host">Solo questo host</option>
-          </select>
-        </div>
-        <p id="record-count" class="status">Caricamento archivio…</p>
-        <div class="btn-row"><button id="export-button" type="button">Esporta tutto in CSV</button><button id="logout-button" class="secondary" type="button">Esci</button></div>
-      </div>
-      <p class="scroll-hint">Sono visibili in colonne i dati raccolti, i dettagli della stima, i consensi e i parametri di provenienza. Su schermi piccoli scorri la tabella in orizzontale.</p>
-      <div class="table-wrap"><table><thead><tr id="column-headings"></tr></thead><tbody id="rows"></tbody></table><div id="empty" class="empty hidden">Nessuna stima o richiesta registrata.</div></div>
-      <div class="toolbar"><p id="page-status" class="status"></p><button id="load-more" class="secondary hidden" type="button">Carica altre righe</button></div>
-      <p id="archive-message" class="message" role="status" aria-live="polite"></p>
-      <p class="footer">Il CSV usa il separatore “;” per aprirsi correttamente in Excel con impostazioni italiane. Le richieste di contatto sono conservate per un massimo di 12 mesi. Esci e chiudi la scheda su dispositivi condivisi.</p>
-    </section>
-  </main>
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Gestione lead · EMIDA</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font:14px/1.4 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#0b0d10;color:#e8eaed}
+header{display:flex;gap:12px;align-items:center;padding:14px 18px;border-bottom:1px solid #222;position:sticky;top:0;background:#0b0d10;z-index:2;flex-wrap:wrap}
+h1{font-size:16px;margin:0 12px 0 0;letter-spacing:.5px}select,input,button{background:#15181d;color:#e8eaed;border:1px solid #2a2f37;border-radius:8px;padding:8px 10px;font:inherit}
+button{cursor:pointer}button.p{background:#fff;color:#000;border-color:#fff;font-weight:600}.chips{display:flex;gap:6px}.chip.on{background:#fff;color:#000}
+.kpi{display:flex;gap:10px;padding:12px 18px;flex-wrap:wrap}.k{background:#15181d;border:1px solid #222;border-radius:10px;padding:10px 14px;min-width:130px}.k b{display:block;font-size:20px}.k span{color:#9aa0a6;font-size:12px}
+.wrap{overflow:auto;padding:0 18px 30px}table{border-collapse:collapse;width:100%;min-width:1300px}th,td{padding:8px 10px;border-bottom:1px solid #1e2228;text-align:left;vertical-align:top;white-space:nowrap}
+th{position:sticky;top:0;background:#111418;color:#9aa0a6;font-weight:500;font-size:12px;text-transform:uppercase;letter-spacing:.4px}td.w{white-space:normal;min-width:260px;max-width:420px;color:#c3c7cc}
+tr:hover td{background:#12151a}.t{display:inline-block;padding:2px 8px;border-radius:20px;font-size:12px;font-weight:600}.t.Amministratore{background:#1d4ed8}.t.Impresa{background:#b45309}.t.o{background:#374151}
+.n{text-align:right;font-variant-numeric:tabular-nums}#login{max-width:340px;margin:15vh auto;display:grid;gap:10px}a{color:#8ab4f8}
+</style></head><body>
+<form id="login"><h1>Gestione lead</h1><input value="alex" disabled><input id="pw" type="password" placeholder="Password" autocomplete="current-password" required><button class="p">Entra</button><div id="err" style="color:#f87171"></div></form>
+<div id="app" hidden>
+<header><h1>LEAD · EMIDA</h1>
+<select id="fSite"><option value="">Tutti i siti</option><option value="tettocondominiale">TettoCondominiale</option><option value="preventivotetto">PreventivoTetto</option><option value="puliziecondominialiverona">Pulizie Verona</option><option value="tettochiaro">TettoChiaro</option></select>
+<div class="chips"><button class="chip on" data-t="">Tutti</button><button class="chip" data-t="Amministratore">Amministratori</button><button class="chip" data-t="Impresa">Imprese</button><button class="chip" data-t="altri">Altri</button></div>
+<input id="q" placeholder="Cerca nome, email, tel, città…" style="flex:1;min-width:180px">
+<button id="csv">Esporta CSV</button><button id="rl">↻</button></header>
+<div class="kpi" id="kpi"></div><div class="wrap"><table><thead><tr><th>Data</th><th>Sito</th><th>Tipo</th><th>Nome</th><th>Cognome</th><th>Email</th><th>Telefono</th><th class="n">Importo €</th><th class="n">Piani</th><th class="n">Appart.</th><th>Città</th><th>Dettagli</th></tr></thead><tbody id="tb"></tbody></table></div></div>
 <script>
-(() => {
-  const loginCard = document.getElementById('login-card');
-  const archive = document.getElementById('archive');
-  const passwordInput = document.getElementById('password');
-  const loginMessage = document.getElementById('login-message');
-  const archiveMessage = document.getElementById('archive-message');
-  const tableBody = document.getElementById('rows');
-  const headerRow = document.getElementById('column-headings');
-  const recordCount = document.getElementById('record-count');
-  const loadMoreButton = document.getElementById('load-more');
-  const exportButton = document.getElementById('export-button');
-  let password = '';
-  let rows = [];
-  let nextOffset = null;
-
-  const COLUMNS = [
-    ['id','ID record'],['createdAt','Data registrazione'],['updatedAt','Ultimo aggiornamento'],['site','Sito'],['event','Tipo richiesta'],
-    ['firstName','Nome'],['lastName','Cognome'],['email','Email'],['phone','Telefono'],['role','Ruolo'],['managesMultiple','Gestisce più stabili'],
-    ['cap','CAP'],['city','Comune'],['intervention','Intervento'],['mqDeclared','Superficie dichiarata (mq)'],['mqUnknown','Superficie stimata automaticamente'],['mqEffective','Superficie usata nel calcolo (mq)'],['apartments','Appartamenti'],['buildingYear','Anno edificio'],['state','Stato segnalato'],
-    ['estimate','Stima totale'],['perApartment','Stima per appartamento'],['works','Lavori'],['scaffolding','Ponteggio'],['remediation','Bonifica amianto'],['fees','Sicurezza / spese tecniche'],['vat','IVA'],['facade','Facciata stimata (mq)'],['floors','Piani stimati'],['asbestos','Amianto segnalato'],['region','Regione tariffaria'],['regionFactor','Coefficiente regionale'],['repair','Riparazione localizzata'],['estimateRows','Voci dettagliate della stima'],
-    ['leadScore','Punteggio lead'],['privacy','Consenso privacy'],['partner','Consenso partner'],['consentAt','Data consensi'],['variant','Variante sito'],['clientTimestamp','Data invio dal browser'],
-    ['utmSource','UTM source'],['utmMedium','UTM medium'],['utmCampaign','UTM campaign'],['utmTerm','UTM term'],['utmContent','UTM content'],['gclid','Google click ID'],['fbclid','Meta click ID'],['page','Pagina di origine'],['referrer','Dominio di provenienza'],['details','Dettagli completi']
-  ];
-  const INTERVENTIONS = {completo:'Rifacimento completo',manto:'Solo manto di copertura',riparazione:'Riparazione infiltrazione',sopralluogo:'Sopralluogo / da definire'};
-  const ROLES = {amministratore:'Amministratore',consiglio:'Membro del consiglio',condomino:'Condomino',impresa:'Impresa'};
-  const YEARS = {pre1970:'Prima del 1970','1970-1990':'1970–1990','1991-2010':'1991–2010',post2010:'Dopo il 2010'};
-  const STATES = {infiltrazioni:'Infiltrazioni attive',tegole:'Tegole rotte o spostate',muffa:'Muffa o macchie',grondaie:'Grondaie ammalorate',amianto:'Possibile amianto',nonso:'Non lo so'};
-  const euro = value => value == null || value === '' || !Number.isFinite(Number(value)) ? '—' : `€ ${Number(value).toLocaleString('it-IT',{maximumFractionDigits:0})}`;
-  const yesNo = value => value === true || value === 1 || value === '1' ? 'Sì' : value === false || value === 0 || value === '0' ? 'No' : value == null || value === '' ? '—' : String(value);
-  const formatDate = value => { const d = new Date(value); return value && !Number.isNaN(d.getTime()) ? d.toLocaleString('it-IT') : (value || '—'); };
-  const range = (low, high) => low == null || high == null ? '—' : `${euro(low)} — ${euro(high)}`;
-  const pair = value => Array.isArray(value) && value.length >= 2 ? range(value[0],value[1]) : '—';
-  function headers() { return { Authorization: 'Basic ' + btoa('alex:' + password) }; }
-  function parsePayload(row) { try { return JSON.parse(row.payload_json || '{}'); } catch { return {}; } }
-  function text(value) { return value == null || value === '' ? '—' : String(value); }
-  function answerLabel(map, value) { return value == null || value === '' ? '—' : (map[value] || String(value)); }
-  function eventLabel(type) { return ({calculation:'Stima',lead:'Richiesta contatto',email_capture:'Richiesta email'})[type] || text(type); }
-  function recordData(row, payload) {
-    const a = payload.answers || {};
-    const e = payload.estimate || {};
-    const c = payload.contact || {};
-    const u = payload.utm || {};
-    const firstName = c.firstName || (row.full_name && row.full_name !== 'Solo calcolo' ? row.full_name.split(/\s+/)[0] : '');
-    const lastName = c.lastName || (row.full_name && row.full_name !== 'Solo calcolo' ? row.full_name.split(/\s+/).slice(1).join(' ') : '');
-    const states = Array.isArray(a.stato) ? a.stato.map(s => answerLabel(STATES,s)).join(', ') : answerLabel(STATES,a.stato);
-    const detailRows = Array.isArray(e.rows) ? e.rows.map(item => `${item.l || 'Voce'}${item.note ? ` — ${item.note}` : ''}: ${pair(item.v)}`).join('\n') : '—';
-    const data = {
-      id: row.id,
-      createdAt: formatDate(row.created_at),
-      updatedAt: formatDate(row.updated_at),
-      site: ({ tettochiaro:'TettoChiaro', preventivotetto:'PreventivoTetto', tettocondominiale:'TettoCondominiale', puliziecondominialiverona:'PulizieCondominialiVerona', tettocondominio:'TettoCondominio' }[row.site] || text(row.site || 'TettoCondominiale')),
-      event: eventLabel(row.event_type),
-      firstName: firstName || (row.full_name === 'Solo calcolo' ? 'Solo calcolo' : '—'),
-      lastName: lastName || '—',
-      email: row.email || c.email || '—',
-      phone: row.phone || c.phone || '—',
-      role: answerLabel(ROLES,a.ruolo),
-      managesMultiple: yesNo(c.managesMultiple),
-      cap: a.cap || payload.cap || '—',
-      city: a.city || a.comune || payload.comune || '—',
-      intervention: answerLabel(INTERVENTIONS,e.intervention || a.intervento),
-      mqDeclared: a.mq,
-      mqUnknown: yesNo(a.mqUnknown),
-      mqEffective: a.mqEffettivi != null ? a.mqEffettivi : e.mq,
-      apartments: a.appartamenti,
-      buildingYear: answerLabel(YEARS,a.anno),
-      state: states,
-      estimate: range(e.low != null ? e.low : e.min,e.high != null ? e.high : e.max),
-      perApartment: range(e.perAptMin,e.perAptMax),
-      works: pair(e.lavori),
-      scaffolding: pair(e.ponteggio),
-      remediation: pair(e.bonifica),
-      fees: pair(e.oneri),
-      vat: pair(e.iva),
-      facade: e.facciataMq,
-      floors: e.piani,
-      asbestos: yesNo(e.amianto != null ? e.amianto : Array.isArray(a.stato) && a.stato.includes('amianto')),
-      region: e.regione,
-      regionFactor: e.coeffRegione,
-      repair: yesNo(e.riparazione),
-      estimateRows: detailRows,
-      leadScore: row.lead_score != null ? row.lead_score : payload.lead_score,
-      privacy: yesNo(row.privacy_accepted != null ? row.privacy_accepted : c.privacyAccepted != null ? c.privacyAccepted : payload.consents && payload.consents.privacy),
-      partner: yesNo(row.partner_accepted != null ? row.partner_accepted : c.partnerAccepted != null ? c.partnerAccepted : payload.consents && payload.consents.trasmissionePartner),
-      consentAt: payload.consents && payload.consents.timestamp,
-      variant: payload.variant,
-      clientTimestamp: payload.client_timestamp,
-      utmSource: u.utm_source,
-      utmMedium: u.utm_medium,
-      utmCampaign: u.utm_campaign,
-      utmTerm: u.utm_term,
-      utmContent: u.utm_content,
-      gclid: u.gclid,
-      fbclid: u.fbclid,
-      page: payload.page,
-      referrer: payload.referrer,
-    };
-    data.rawJson = JSON.stringify({record:{id:row.id,site:row.site,event_type:row.event_type,created_at:row.created_at,updated_at:row.updated_at,full_name:row.full_name,phone:row.phone,email:row.email,lead_score:row.lead_score,privacy_accepted:row.privacy_accepted,partner_accepted:row.partner_accepted},payload},null,2);
-    return data;
-  }
-  function makeCell(value, className = '') {
-    const td = document.createElement('td');
-    if (className) td.className = className;
-    td.textContent = text(value);
-    return td;
-  }
-  function renderRows() {
-    tableBody.replaceChildren();
-    document.getElementById('empty').classList.toggle('hidden', rows.length > 0);
-    for (const row of rows) {
-      const payload = parsePayload(row);
-      const data = recordData(row,payload);
-      const tr = document.createElement('tr');
-      for (const [key] of COLUMNS) {
-        if (key === 'details') {
-          const td = document.createElement('td');
-          const details = document.createElement('details'); details.className = 'details';
-          const summary = document.createElement('summary'); summary.textContent = 'Apri JSON';
-          const pre = document.createElement('pre'); pre.textContent = data.rawJson;
-          details.append(summary,pre); td.append(details); tr.append(td);
-        } else {
-          const multiline = ['state','estimateRows'].includes(key);
-          const estimateCell = ['estimate','perApartment'].includes(key);
-          tr.append(makeCell(data[key],multiline ? 'multiline' : estimateCell ? 'estimate-cell' : ''));
-        }
-      }
-      tableBody.append(tr);
-    }
-    recordCount.textContent = `${rows.length.toLocaleString('it-IT')} record caricati`;
-    loadMoreButton.classList.toggle('hidden', nextOffset == null);
-  }
-  function initializeHeaders() {
-    headerRow.replaceChildren(...COLUMNS.map(([key,label]) => {
-      const th = document.createElement('th'); th.scope = 'col'; th.textContent = label; return th;
-    }));
-  }
-  let siteFilter = 'all';
-  const siteFilterEl = document.getElementById('site-filter');
-  async function fetchPage(offset = 0, append = false) {
-    archiveMessage.textContent = '';
-    const sites = encodeURIComponent(siteFilterEl ? siteFilterEl.value : siteFilter);
-    const response = await fetch(`/api/admin/leads?sites=${sites}&offset=${offset}&limit=100`, {headers:headers(), cache:'no-store'});
-    if (response.status === 401) throw new Error('Password errata o sessione scaduta.');
-    if (!response.ok) throw new Error('Non è stato possibile leggere l’archivio.');
-    const data = await response.json();
-    rows = append ? rows.concat(data.rows || []) : (data.rows || []);
-    nextOffset = data.nextOffset;
-    renderRows();
-  }
-  document.getElementById('login-form').addEventListener('submit', async event => {
-    event.preventDefault();
-    password = passwordInput.value;
-    document.getElementById('login-button').disabled = true;
-    loginMessage.textContent = 'Verifica in corso…';
-    try {
-      await fetchPage(0, false);
-      loginCard.classList.add('hidden'); archive.classList.remove('hidden'); loginMessage.textContent = '';
-    } catch (error) {
-      password = ''; loginMessage.textContent = error.message || 'Accesso non riuscito.'; passwordInput.value = '';
-    } finally { document.getElementById('login-button').disabled = false; }
-  });
-  loadMoreButton.addEventListener('click', async () => {
-    if (nextOffset == null) return;
-    loadMoreButton.disabled = true;
-    try { await fetchPage(nextOffset, true); } catch (error) { archiveMessage.textContent = error.message; }
-    finally { loadMoreButton.disabled = false; }
-  });
-  document.getElementById('logout-button').addEventListener('click', () => {
-    password = ''; rows = []; nextOffset = null; tableBody.replaceChildren();
-    archive.classList.add('hidden'); loginCard.classList.remove('hidden'); passwordInput.value = ''; passwordInput.focus();
-  });
-  exportButton.addEventListener('click', async () => {
-    exportButton.disabled = true; archiveMessage.textContent = 'Preparazione CSV…';
-    try {
-      const all = []; let offset = 0;
-      while (true) {
-        const sites = encodeURIComponent(siteFilterEl ? siteFilterEl.value : siteFilter);
-        const response = await fetch(`/api/admin/leads?sites=${sites}&offset=${offset}&limit=1000`, {headers:headers(), cache:'no-store'});
-        if (response.status === 401) throw new Error('Password errata o sessione scaduta.');
-        if (!response.ok) throw new Error('Esportazione non riuscita.');
-        const data = await response.json(); all.push(...(data.rows || []));
-        if (data.nextOffset == null) break;
-        offset = data.nextOffset;
-      }
-      const columns = COLUMNS.map(([,label]) => label);
-      const quote = value => `"${String(value == null ? '' : value).replaceAll('"','""')}"`;
-      const lines = [columns.map(quote).join(';')];
-      for (const row of all) {
-        const data = recordData(row,parsePayload(row));
-        lines.push(COLUMNS.map(([key]) => quote(key === 'details' ? data.rawJson : data[key])).join(';'));
-      }
-      const blob = new Blob(['\ufeff' + lines.join('\r\n')], {type:'text/csv;charset=utf-8'});
-      const url = URL.createObjectURL(blob); const link = document.createElement('a');
-      link.href = url; link.download = `tetto-lead-${new Date().toISOString().slice(0,10)}.csv`; link.click(); URL.revokeObjectURL(url);
-      archiveMessage.className = 'message ok'; archiveMessage.textContent = `${all.length.toLocaleString('it-IT')} record esportati con tutti i campi.`;
-    } catch (error) { archiveMessage.className = 'message error'; archiveMessage.textContent = error.message || 'Esportazione non riuscita.'; }
-    finally { exportButton.disabled = false; }
-  });
-  initializeHeaders();
-  if (siteFilterEl) {
-    siteFilterEl.addEventListener('change', async () => {
-      try { await fetchPage(0, false); } catch (error) { archiveMessage.textContent = error.message; }
-    });
-  }
-})();
-</script>
-</body>
-<!-- admin-v2 -->
-</html>
-
-
+const L={tettocondominiale:'TettoCondominiale',preventivotetto:'PreventivoTetto',puliziecondominialiverona:'Pulizie Verona',tettochiaro:'TettoChiaro'};
+let pw=sessionStorage.getItem('glpw')||'',rows=[],tipoF='';
+const $=id=>document.getElementById(id),esc=v=>String(v??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function norm(r){let p={};try{p=JSON.parse(r.payload_json||'{}')}catch{}const c=p.contact||{},a=p.answers||{},q=a.quote||{},e=p.estimate||{};
+ let tipo=a.partner?'Impresa':(String(a.ruolo||'').toLowerCase().startsWith('ammin')?'Amministratore':(a.ruolo?a.ruolo[0].toUpperCase()+a.ruolo.slice(1):(r.site==='puliziecondominialiverona'?'Cliente pulizie':'Privato')));
+ const lo=Number(e.low??e.min),hi=Number(e.high??e.max);const imp=q.stimaMensileEur!=null?Math.round(q.stimaMensileEur*12):(lo&&hi?Math.round((lo+hi)/2):(lo||hi||null));
+ const full=(c.fullName||r.full_name||'').trim().split(/\s+/);const first=c.firstName||(full.length>1?full[0]:''),last=c.lastName||(full.length>1?full.slice(1).join(' '):full[0]||'');
+ const extra=[q.ascensore&&'ascensore',q.areaEsterna&&'area esterna',q.garage&&'garage',q.piuScale&&'più scale'].filter(Boolean);
+ let det=q.riepilogo?[q.riepilogo,q.stimaMensileEur!=null?q.stimaMensileEur+' €/mese + IVA':'','Extra: '+(extra.join(', ')||'nessuno')]:a.partner?['Candidatura '+(a.tipo||'impresa'),a.servizi||a.note||'']:[a.intervento||e.intervention,a.mq?a.mq+' mq':'',a.anno,(a.stato||[]).join(', '),lo&&hi?`range ${lo.toLocaleString('it-IT')}–${hi.toLocaleString('it-IT')} €`:''];
+ if(r.event_type!=='lead')det.unshift('['+r.event_type+']');
+ return{id:r.id,d:r.created_at,site:r.site,tipo,first,last,email:c.email||r.email||'',tel:c.phone||r.phone||'',imp,piani:q.piani??e.piani??'',app:q.appartamenti??a.appartamenti??'',city:a.city||a.comune||p.cap||'',det:det.filter(Boolean).join(' · ')}}
+async function load(){const r=await fetch('/api/admin/leads?sites=all&limit=1000',{headers:{Authorization:'Basic '+btoa('alex:'+pw)},cache:'no-store'});if(r.status===401){sessionStorage.removeItem('glpw');throw new Error('Password errata')}const j=await r.json();if(!j.ok)throw new Error(j.error||'Errore');rows=j.rows.map(norm);$('login').hidden=true;$('app').hidden=false;render()}
+function filt(){const s=$('fSite').value,q=$('q').value.toLowerCase();return rows.filter(r=>(!s||r.site===s)&&(!tipoF||(tipoF==='altri'?!['Amministratore','Impresa'].includes(r.tipo):r.tipo===tipoF))&&(!q||[r.first,r.last,r.email,r.tel,r.city,r.det].join(' ').toLowerCase().includes(q)))}
+function render(){const f=filt(),sum=f.reduce((a,r)=>a+(r.imp||0),0);
+ $('kpi').innerHTML=[['Lead',f.length],['Amministratori',f.filter(r=>r.tipo==='Amministratore').length],['Imprese',f.filter(r=>r.tipo==='Impresa').length],['Valore stimato',sum.toLocaleString('it-IT')+' €'],['Oggi',f.filter(r=>r.d&&r.d.slice(0,10)===new Date().toISOString().slice(0,10)).length]].map(([k,v])=>`<div class="k"><b>${v}</b><span>${k}</span></div>`).join('');
+ $('tb').innerHTML=f.map(r=>`<tr><td>${esc(new Date(r.d).toLocaleString('it-IT',{dateStyle:'short',timeStyle:'short'}))}</td><td>${esc(L[r.site]||r.site)}</td><td><span class="t ${['Amministratore','Impresa'].includes(r.tipo)?r.tipo:'o'}">${esc(r.tipo)}</span></td><td>${esc(r.first)}</td><td>${esc(r.last)}</td><td><a href="mailto:${esc(r.email)}">${esc(r.email)}</a></td><td><a href="tel:${esc(r.tel)}">${esc(r.tel)}</a></td><td class="n">${r.imp?r.imp.toLocaleString('it-IT'):''}</td><td class="n">${esc(r.piani)}</td><td class="n">${esc(r.app)}</td><td>${esc(r.city)}</td><td class="w">${esc(r.det)}</td></tr>`).join('')}
+$('csv').onclick=()=>{const h=['Data','Sito','Tipo','Nome','Cognome','Email','Telefono','Importo','Piani','Appartamenti','Citta','Dettagli'];const c=v=>'"'+String(v??'').replace(/"/g,'""')+'"';const t=[h.join(';'),...filt().map(r=>[r.d,L[r.site]||r.site,r.tipo,r.first,r.last,r.email,r.tel,r.imp,r.piani,r.app,r.city,r.det].map(c).join(';'))].join('\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff'+t],{type:'text/csv'}));a.download='lead.csv';a.click()};
+document.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{document.querySelectorAll('.chip').forEach(x=>x.classList.remove('on'));b.classList.add('on');tipoF=b.dataset.t;render()});
+$('fSite').onchange=render;$('q').oninput=render;$('rl').onclick=()=>load().catch(e=>alert(e.message));
+$('login').onsubmit=e=>{e.preventDefault();pw=$('pw').value;sessionStorage.setItem('glpw',pw);load().catch(x=>$('err').textContent=x.message)};
+if(pw)load().catch(()=>{});
+</script></body></html>

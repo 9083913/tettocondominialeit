@@ -101,22 +101,35 @@ const SITE_LABELS = {
 const CRM_SITE_KEYS = Object.keys(SITE_LABELS);
 function siteLabel(site) { return SITE_LABELS[site] || site || "Lead"; }
 function field(s,n) { return typeof s==="string"?s.trim().slice(0,n):""; }
+const SITE_URLS={tettochiaro:"https://tettochiaroclaude.pages.dev/",preventivotetto:"https://preventivotetto.it/",tettocondominiale:"https://tettocondominiale.it/",puliziecondominialiverona:"https://puliziecondominialiverona.it/",tettocondominio:"https://tettocondominio.it/"};
+export function leadTipo(site,ans){ if(ans.partner) return "Impresa"; const r=String(ans.ruolo||"").toLowerCase(); if(r.startsWith("ammin")) return "Amministratore"; if(r) return r.charAt(0).toUpperCase()+r.slice(1); return site==="puliziecondominialiverona"?"Cliente pulizie":"Privato"; }
+export function leadImporto(p){ const q=p.answers?.quote||{}, e=p.estimate||{}; if(q.stimaMensileEur!=null) return Math.round(Number(q.stimaMensileEur)*12); const lo=Number(e.low??e.min), hi=Number(e.high??e.max); if(lo&&hi) return Math.round((lo+hi)/2); return lo||hi||null; }
+function cleanName(s){ s=field(s,80); return /https?:|www\.|\.it\b|\.com\b|·|\|/.test(s)?"":s; }
+function buildZohoLead(row,p){
+  const contact=p.contact||{}, ans=p.answers||{}, q=ans.quote||{}, e=p.estimate||{}, label=siteLabel(row.site), tipo=leadTipo(row.site,ans), imp=leadImporto(p);
+  let first=cleanName(contact.firstName), last=cleanName(contact.lastName);
+  if(!last){ const parts=cleanName(contact.fullName).split(/\s+/).filter(Boolean); if(parts.length>1&&!first){first=parts.shift();} last=parts.join(" "); }
+  if(first&&last===first+" "+first) last=first;
+  const data={Last_Name:field(last,80)||"Lead",Email:field(contact.email,254).toLowerCase(),Tag:[{name:row.site},{name:tipo}],Designation:tipo,Lead_Source:ans.partner?"Partner":"Web Download",Website:field(ans.landing_url||SITE_URLS[row.site]||"",255)};
+  if(first)data.First_Name=field(first,40);
+  const phone=field(contact.phone,30), city=field(ans.city||ans.comune,100), zip=field(p.cap||ans.cap,30);
+  if(phone)data.Phone=phone; if(city)data.City=city; if(zip)data.Zip_Code=zip;
+  if(ans.street||ans.address)data.Street=field(ans.street||ans.address,250);
+  if(ans.partner)data.Company=field(contact.company||ans.company||contact.fullName,200);
+  if(imp)data.Annual_Revenue=imp;
+  const L=[`Sito: ${label}`,`Tipo: ${tipo}`,`Importo stimato: ${imp?imp.toLocaleString("it-IT")+" €"+(q.stimaMensileEur!=null?" /anno ("+q.stimaMensileEur+" €/mese + IVA)":""):"-"}`];
+  if(row.site==="puliziecondominialiverona"&&!ans.partner) L.push(`Piani: ${q.piani??"-"}`,`Appartamenti: ${q.appartamenti??"-"}`,`Frequenza: ${q.frequenza||"-"}`,`Servizi extra: ${[q.ascensore&&"ascensore",q.areaEsterna&&"area esterna",q.garage&&"garage",q.piuScale&&"più scale"].filter(Boolean).join(", ")||"nessuno"}`,`Riepilogo: ${q.riepilogo||""}`);
+  else if(ans.partner) L.push(`Candidatura impresa partner (${ans.tipo||""})`);
+  else L.push(`Intervento: ${ans.intervento||e.intervention||"-"}`,`Mq: ${ans.mq??e.mq??"-"} · Piani: ${e.piani??"-"} · Appartamenti: ${ans.appartamenti??"-"}`,`Anno: ${ans.anno||"-"} · Stato: ${(ans.stato||[]).join(", ")}`,`Range: ${e.low??e.min??"-"} – ${e.high??e.max??"-"} €`,`Score: ${p.lead_score??""}`);
+  L.push(`Fonte form: ${ans.source||'-'}${ans.mode?' / '+ans.mode:''}`,`Azienda: ${ans.company||''} · Servizi: ${ans.servizi||''}`,`Indirizzo: ${ans.address||ans.street||""} ${city} ${zip}`.trim(),`Landing: ${data.Website}`);
+  data.Description=field(L.join("\n"),32000);
+  return data;
+}
 export async function syncLead(env, leadId) {
   const placeholders = CRM_SITE_KEYS.map(()=>"?").join(",");
   const d=db(env), row=await d.prepare(`SELECT id,site,event_type,created_at,payload_json FROM lead_records WHERE id=? AND site IN (${placeholders}) AND event_type='lead'`).bind(leadId, ...CRM_SITE_KEYS).first();
   if(!row) throw new Error("lead_missing"); const p=JSON.parse(row.payload_json), contact=p.contact||{}, ans=p.answers||{}, q=ans.quote||{};
-  const label=siteLabel(row.site);
-  const email=field(contact.email,254).toLowerCase();
-  const data={Last_Name:field(contact.lastName,80)||field(contact.fullName,80)||"Lead",Email:email,Tag:[{name:row.site}]};
-  const first=field(contact.firstName,40), phone=field(contact.phone,30), city=field(ans.city||ans.comune,100), zip=field(p.cap||ans.cap,30);
-  if(first)data.First_Name=first;if(phone)data.Phone=phone;if(city)data.City=city;if(zip)data.Zip_Code=zip;
-  if(ans.street||ans.address)data.Street=field(ans.street||ans.address,250);
-  if(ans.partner)data.Company=field(contact.fullName,200);
-  if(row.site==="puliziecondominialiverona"){
-    data.Description=field(`Sito: puliziecondominialiverona.it\nTag: ${row.site}\nTipo: ${ans.partner?"Candidatura partner ("+(ans.tipo||"")+")":"Richiesta preventivo pulizie"}\nIndirizzo: ${ans.address||""}\nCittà: ${ans.city||""}\nStima mensile: ${q.stimaMensileEur!=null?q.stimaMensileEur+" €/mese + IVA":"-"}\nRiepilogo: ${q.riepilogo||""}\nPiani: ${q.piani??""} · Appartamenti: ${q.appartamenti??""} · Ascensore: ${q.ascensore?"sì":"no"} · Area esterna: ${q.areaEsterna?"sì":"no"} · Garage: ${q.garage?"sì":"no"} · Più scale: ${q.piuScale?"sì":"no"} · Frequenza: ${q.frequenza||""}`,32000);
-  } else {
-    data.Description=field(`Sito: ${label} (tag: ${row.site})\nRuolo: ${ans.ruolo||""}\nCittà: ${ans.city||ans.comune||""}\nCAP: ${p.cap||ans.cap||""}\nIntervento: ${ans.intervento||p.estimate?.intervention||""}\nScore: ${p.lead_score??""}`,32000);
-  }
+  const label=siteLabel(row.site), data=buildZohoLead(row,p), email=data.Email;
   if(!email||!data.Last_Name) throw new Error("lead_invalid");
   const c=await config(env), token=await accessToken(env,c);
   const up=await api(env,c,token,"/Leads/upsert",{method:"POST",body:JSON.stringify({data:[data],duplicate_check_fields:["Email"],trigger:[]})});
