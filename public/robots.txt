@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /gestione-lead.html
+Disallow: /collega-zoho.html
+Disallow: /collega-zoho-completato.html
+
+Sitemap: https://tettocondominiale.it/sitemap.xml
