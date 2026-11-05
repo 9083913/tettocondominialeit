@@ -1,7 +1,9 @@
 User-agent: *
 Allow: /
 Disallow: /api/
+Disallow: /gestione-lead
 Disallow: /gestione-lead.html
+Disallow: /api/admin/
 Disallow: /collega-zoho.html
 Disallow: /collega-zoho-completato.html
 
