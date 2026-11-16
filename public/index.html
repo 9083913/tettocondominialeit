@@ -270,6 +270,7 @@ footer nav button{background:none;border:0;padding:0;color:#fff;font:inherit;fon
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 
+
 /* ===== DESIGN SYSTEM v1 — token (unica fonte) ===== */
 :root{
   --font:'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
@@ -279,7 +280,7 @@ footer nav button{background:none;border:0;padding:0;color:#fff;font:inherit;fon
   --sh-1:0 1px 2px rgba(18,48,74,.08);--sh-2:0 12px 32px rgba(18,48,74,.16);--sh-3:0 24px 60px rgba(0,0,0,.28);
   --tap:48px;
 }
-/* pilota: hero + quiz + cookie */
+/* hero + quiz */
 .hero-grid{--min:440px;align-items:center;padding-top:var(--sp-6);padding-bottom:var(--sp-12)}
 .hero-txt{padding-top:0;gap:var(--sp-5)}
 h1{font-size:var(--fs-2xl);line-height:1.08}
@@ -297,18 +298,67 @@ h1{font-size:var(--fs-2xl);line-height:1.08}
 .q{gap:var(--sp-5)}
 .inp{font-size:16px}
 .ck-btns button{min-height:var(--tap);border-radius:var(--r-sm)}
-.x{width:var(--tap);height:var(--tap)}
+/* sezioni */
+section{padding:clamp(40px,5.5vw,72px) 0}
+.sec{gap:var(--sp-8)}
+h2{font-size:clamp(26px,3.4vw,38px);line-height:1.12}
+.step{gap:var(--sp-2);padding-top:var(--sp-4)}
+.step .n{font-size:36px;color:var(--or)}.step h3{font-size:var(--fs-lg)}
+.fat{padding:var(--sp-5);border-radius:var(--r-md)}.fat h3{font-size:18px}.fat .d{font-size:var(--fs-md)}
+.fat-cta{border-radius:var(--r-md);padding:var(--sp-5)}.fat-cta p{font-size:var(--fs-md)}
+.adm{border-radius:var(--r-lg);padding:clamp(20px,4vw,40px);gap:var(--sp-6)}
+.adm-i b{font-size:var(--fs-md)}
+.faq summary{min-height:56px;font-size:var(--fs-md)}
+.faq details{border-radius:var(--r-sm)}
+footer .wrap{padding-top:var(--sp-6);padding-bottom:var(--sp-6)}
+footer nav{gap:var(--sp-2) var(--sp-5)}
+footer nav button,footer nav a{min-height:44px;display:inline-flex;align-items:center}
+.chk{min-height:44px;align-items:center}
+.est-det summary{min-height:44px;display:flex;align-items:center}
+/* impresa partner */
+section#lavora-p{max-width:1240px;margin:0 auto;padding:0 clamp(16px,4vw,48px) clamp(40px,5.5vw,72px)}
+section#lavora-p .bx{background:var(--navy);border-radius:var(--r-lg);padding:var(--sp-8);gap:var(--sp-6)}
+section#lavora-p h2{font-size:var(--fs-xl);margin:var(--sp-1) 0}
+section#lavora-p p{font-size:var(--fs-md);color:#D7E2EC}
+section#lavora-p .ey{font-size:var(--fs-xs);color:#F4A57E;letter-spacing:.08em}
+section#lavora-p button{border-radius:var(--r-sm);min-height:var(--tap);padding:0 var(--sp-6);font-weight:800}
+#pp-m{background:rgba(10,26,40,.62)}
+#pp-m .c{border-radius:var(--r-lg);padding:var(--sp-6);color:var(--navy);box-shadow:var(--sh-3)}
+#pp-m input,#pp-m select{height:var(--tap);border:2px solid #C9D3DC;border-radius:var(--r-sm);padding:0 14px;font-size:16px;color:var(--navy);margin:0 0 var(--sp-2)}
+#pp-m .go{background:var(--or);border-radius:var(--r-sm);min-height:var(--tap);font-size:var(--fs-md);font-weight:800}
+#pp-m .go:hover{background:var(--orh)}
+#pp-m .x{width:44px;height:44px;top:var(--sp-2);right:var(--sp-2);font-size:24px}
+#pp-m label{font-size:var(--fs-sm);color:var(--ink2);align-items:flex-start}
+#pp-m label input{width:22px;height:22px;margin:0;accent-color:var(--navy)}
+#pp-err{font-size:var(--fs-sm)}
+.modal-c{border-radius:var(--r-lg)}
+.legal-dlg .lg-head{padding:var(--sp-4) var(--sp-5)}
 @media (max-width:767px){
   .top small{display:none}
+  .wrap{padding-left:var(--sp-4);padding-right:var(--sp-4)}
   .hero-grid{gap:var(--sp-3);padding-top:var(--sp-3);padding-bottom:var(--sp-5)}
   h1{font-size:clamp(24px,7vw,30px)}
   .sub{font-size:var(--fs-md);line-height:1.4}
   .opt{min-height:56px}
   .q-title{font-size:22px}
-  .ck{width:calc(100vw - 16px);max-width:none;left:8px;right:8px;padding:var(--sp-3);border-radius:var(--r-md)}
-  .ck{padding:10px 12px;gap:6px}.ck p{font-size:12px;line-height:1.35}.ck-h b{font-size:14px}
-  .ck-btns{gap:6px}.ck-btns button{font-size:12px;min-height:44px}
-  .x{width:44px;height:44px;margin:-8px -8px 0 0;border-color:transparent;background:transparent}
+  section{padding:36px 0}.sec{gap:var(--sp-5)}
+  h2{font-size:24px}
+  .step{display:grid;grid-template-columns:36px 1fr;column-gap:var(--sp-3);row-gap:var(--sp-1);border-top:0;padding-top:0}
+  .step .n{grid-row:span 2;font-size:32px}.step h3{font-size:18px}
+  .fat-grid{display:flex!important;overflow-x:auto;scroll-snap-type:x mandatory;gap:var(--sp-3);margin:0 calc(-1*var(--sp-4));padding:0 var(--sp-4) var(--sp-2);-webkit-overflow-scrolling:touch}
+  .fat-grid>*{flex:0 0 78%;scroll-snap-align:start}
+  .adm{padding:var(--sp-5) var(--sp-4);gap:var(--sp-5)}
+  section#lavora-p .bx{padding:var(--sp-5) var(--sp-4)}
+  section#lavora-p h2{font-size:22px}
+  section#lavora-p button{width:100%}
+  footer .wrap{padding-bottom:calc(var(--sp-6) + 72px)}
+  .ck{width:calc(100vw - 16px);max-width:none;left:8px;right:8px;padding:10px 12px;gap:6px;border-radius:var(--r-md)}
+  .ck p{font-size:12px;line-height:1.35}.ck-h b{font-size:14px}
+  .ck-btns{grid-template-columns:1fr 1fr 1fr;gap:6px}.ck-btns button{font-size:12px;min-height:44px}
+  .x{width:44px;height:44px;margin:-8px -8px 0 0;border-color:transparent;background:transparent;font-size:16px}
+  .modal,div#pp-m{align-items:flex-end;padding:0}
+  .modal-c,div#pp-m .c{max-width:none;width:100%;max-height:92dvh;border-radius:var(--r-lg) var(--r-lg) 0 0;padding:var(--sp-5) var(--sp-4) var(--sp-4)}
+  #pp-m .go{position:sticky;bottom:var(--sp-2)}
 }
 </style>
 <!-- Google tag (gtag.js) -->
@@ -338,7 +388,7 @@ h1{font-size:var(--fs-2xl);line-height:1.08}
 <header class="hero">
   <img class="hero-img" src="hero.webp" alt="Cantiere di rifacimento tetto condominiale con ponteggio" width="1920" height="1080" fetchpriority="high" decoding="async" onerror="this.remove()">
   <div class="hero-scrim"></div>
-  <div class="wrap top"><div class="logo"><i></i>TettoCondominiale</div><small>3 imprese verificate a confronto</small></div>
+  <div class="wrap top"><div class="logo"><i></i>TettoCondominiale</div></div>
   <div class="wrap grid hero-grid">
     <div class="hero-txt">
       <h1><span class="hl">Quanto costa rifare il tetto</span> <span class="hl">del tuo condominio?</span></h1>
@@ -348,7 +398,7 @@ h1{font-size:var(--fs-2xl);line-height:1.08}
         <span class="trust">Gratuito · Nessun obbligo · Dati non venduti a terzi senza consenso</span>
       </div>
       <div class="checks">
-        <div><b>✓</b>Non siamo un'impresa edile: confrontiamo per te 3 imprese qualificate.</div>
+        <div><b>✓</b>Non siamo un'impresa edile: confrontiamo 3 imprese qualificate.</div>
         <div><b>✓</b>Vedi la stima prima di lasciare qualsiasi contatto.</div>
         <div><b>✓</b>Ponteggio ed eventuale bonifica amianto sempre indicati a parte.</div>
       </div>
@@ -362,21 +412,20 @@ h1{font-size:var(--fs-2xl);line-height:1.08}
 <section aria-labelledby="come-funziona">
   <div class="wrap sec">
     <h2 id="come-funziona">Come funziona</h2>
-    <div class="grid" style="--min:260px;--gap:28px"><article class="step"><span class="n">1</span><h3>Compili</h3><p class="t">7 domande sul tuo edificio, senza dati personali fino alla fine. Ci vuole circa un minuto.</p></article>
-<article class="step"><span class="n">2</span><h3>Ricevi la stima</h3><p class="t">Vedi subito un range di costo basato sui prezzi medi di mercato, con ponteggio ed eventuale bonifica separati.</p></article>
-<article class="step"><span class="n">3</span><h3>Ti contattano max 3 imprese verificate</h3><p class="t">Solo imprese della tua zona, con documentazione controllata. Confronti i preventivi e decidi tu, senza obblighi.</p></article></div>
-    <div><button type="button" class="btn" data-cta>Calcola la stima →</button></div>
+    <div class="grid" style="--min:260px;--gap:28px"><article class="step"><span class="n">1</span><h3>Compili</h3><p class="t">7 domande sull’edificio, nessun dato personale fino alla fine. Circa un minuto.</p></article>
+<article class="step"><span class="n">2</span><h3>Ricevi la stima</h3><p class="t">Range di costo su prezzi medi di mercato, con ponteggio ed eventuale bonifica separati.</p></article>
+<article class="step"><span class="n">3</span><h3>Max 3 imprese ti contattano</h3><p class="t">Imprese della tua zona con documenti controllati. Confronti e decidi tu, senza obblighi.</p></article></div>
   </div>
 </section>
 
 <section class="white" aria-labelledby="costi-tetto">
   <div class="wrap sec">
     <h2 id="costi-tetto" style="max-width:20ch">Cosa fa lievitare il costo di un tetto</h2>
-    <div class="grid" style="--min:300px;--gap:14px"><article class="fat"><h3>Amianto</h3><span class="d">+40–80 €/mq</span><p>Le vecchie coperture in fibrocemento richiedono la bonifica da parte di una ditta iscritta all'Albo Gestori Ambientali e un piano di lavoro notificato all'ASL. È una voce separata e spesso la più pesante.</p></article>
-<article class="fat"><h3>Ponteggio</h3><span class="d">12–20 €/mq di facciata</span><p>È obbligatorio e si calcola sulla superficie di facciata, non del tetto. Su un condominio alto o con più fronti incide in modo significativo sul totale.</p></article>
-<article class="fat"><h3>Coibentazione</h3><span class="d">fino a 2× il solo manto</span><p>Rifare il tetto con l'isolamento costa di più del solo manto, ma riduce le dispersioni dell'ultimo piano e spesso è richiesto dalle norme energetiche quando si interviene sulla copertura.</p></article>
-<article class="fat"><h3>Accessibilità</h3><span class="d">variabile</span><p>Strade strette, cortili interni, necessità di gru o di occupazione del suolo pubblico aumentano tempi e costi di cantiere.</p></article>
-<article class="fat"><h3>Stagionalità</h3><span class="d">variabile</span><p>In primavera ed estate le imprese hanno agende piene e prezzi meno trattabili. Programmare in anticipo, o in autunno, aiuta a ottenere condizioni migliori.</p></article>
+    <div class="grid fat-grid" style="--min:300px;--gap:14px"><article class="fat"><h3>Amianto</h3><span class="d">+40–80 €/mq</span><p>Le coperture in fibrocemento richiedono bonifica da ditta iscritta all'Albo Gestori Ambientali e piano di lavoro notificato all'ASL. Voce separata e spesso la più pesante.</p></article>
+<article class="fat"><h3>Ponteggio</h3><span class="d">12–20 €/mq di facciata</span><p>Obbligatorio, si calcola sulla facciata e non sul tetto. Su edifici alti o con più fronti pesa molto sul totale.</p></article>
+<article class="fat"><h3>Coibentazione</h3><span class="d">fino a 2× il solo manto</span><p>Costa più del solo manto, ma riduce le dispersioni dell'ultimo piano ed è spesso richiesta dalle norme energetiche.</p></article>
+<article class="fat"><h3>Accessibilità</h3><span class="d">variabile</span><p>Strade strette, cortili interni, gru o suolo pubblico aumentano tempi e costi.</p></article>
+<article class="fat"><h3>Stagionalità</h3><span class="d">variabile</span><p>In primavera ed estate le imprese sono piene e i prezzi meno trattabili. Programmare in anticipo o in autunno aiuta.</p></article>
       <div class="fat-cta"><p>Il calcolatore tiene conto di questi fattori e li mostra separati nella stima.</p><button type="button" class="btn" data-cta>Calcola la stima →</button></div>
     </div>
   </div>
@@ -386,10 +435,9 @@ h1{font-size:var(--fs-2xl);line-height:1.08}
   <div class="wrap">
     <div class="adm">
       <div style="display:flex;flex-direction:column;gap:12px;max-width:720px"><span class="tag">Per gli amministratori</span><h2 id="tre-preventivi">Tre preventivi, un solo documento da portare in assemblea</h2></div>
-      <div class="grid" style="--gap:28px"><div class="adm-i"><span>1</span><b>Comparativa pronta per l’assemblea</b><p>I 3 preventivi vengono riportati in un unico documento con voci omogenee: manto, coibentazione, ponteggio, bonifica, oneri sicurezza, tempi e garanzie.</p></div>
-<div class="adm-i"><span>2</span><b>Tempistiche chiare</b><p>Sopralluoghi coordinati in un’unica finestra e preventivi entro tempi definiti, così puoi fissare l’assemblea con date certe.</p></div>
-<div class="adm-i"><span>3</span><b>Gestione documentale</b><p>DURC, visura camerale, polizze RC e, dove serve, iscrizione all’Albo Gestori Ambientali: raccolti per ogni impresa e pronti da allegare al verbale.</p></div></div>
-      <div class="row-cta"><button type="button" class="btn" data-cta>Calcola la stima →</button><span>Gestisci più stabili? Indicalo nel modulo finale.</span></div>
+      <div class="grid" style="--gap:28px"><div class="adm-i"><span>1</span><b>Comparativa pronta per l’assemblea</b><p>I 3 preventivi in un unico documento con voci omogenee: manto, coibentazione, ponteggio, bonifica, sicurezza, tempi e garanzie.</p></div>
+<div class="adm-i"><span>2</span><b>Tempistiche chiare</b><p>Sopralluoghi in un’unica finestra e preventivi a tempi definiti: assemblea con date certe.</p></div>
+<div class="adm-i"><span>3</span><b>Gestione documentale</b><p>DURC, visura, polizze RC e, se serve, Albo Gestori Ambientali: raccolti per ogni impresa, pronti per il verbale.</p></div></div>
     </div>
   </div>
 </section>
@@ -422,9 +470,9 @@ h1{font-size:var(--fs-2xl);line-height:1.08}
 </main>
 
 <!-- Lavora con noi: imprese partner -->
-<style>#lavora-p{max-width:1100px;margin:40px auto;padding:0 18px;font-family:inherit}#lavora-p .bx{background:linear-gradient(115deg,#101828,#152b55);color:#fff;border-radius:20px;padding:32px;display:flex;gap:24px;align-items:center;justify-content:space-between;flex-wrap:wrap}#lavora-p h2{margin:6px 0;font-size:clamp(1.5rem,2.5vw,2rem);color:#fff}#lavora-p p{margin:0;color:#d0d8e5}#lavora-p .ey{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#9db8ff;font-weight:700}#lavora-p button{background:#fff;color:#101828;border:0;border-radius:12px;padding:14px 22px;font-weight:700;font-size:16px;cursor:pointer}
-#pp-m{position:fixed;inset:0;background:rgba(10,16,30,.55);display:flex;align-items:center;justify-content:center;z-index:9998;padding:16px}#pp-m[hidden]{display:none}#pp-m .c{background:#fff;color:#152238;max-width:460px;width:100%;border-radius:18px;padding:24px;position:relative;max-height:92vh;overflow:auto}#pp-m input,#pp-m select{width:100%;border:1px solid #d6deeb;border-radius:10px;padding:11px;margin:0 0 8px;font:inherit}#pp-m .go{width:100%;background:#1744c8;color:#fff;border:0;border-radius:12px;padding:13px;font-weight:700;cursor:pointer}#pp-m .x{position:absolute;top:8px;right:12px;background:none;border:0;font-size:22px;cursor:pointer}#pp-m label{display:flex;gap:8px;font-size:12px;color:#5e6b80;margin:4px 0 10px}#pp-m label input{width:auto}</style>
-<section id="lavora-p" aria-labelledby="h-lp"><div class="bx"><div><div class="ey">Lavora con noi</div><h2 id="h-lp">Sei un'impresa edile o un lattoniere?</h2><p>Ti passiamo richieste di condomini e amministratori nella tua zona: zero costi di acquisizione, un solo referente.</p></div><button type="button" id="pp-open">Candida la tua impresa</button></div></section>
+<style>#lavora-p{max-width:1100px;margin:40px auto;padding:0 18px;font-family:inherit}#lavora-p .bx{color:#fff;display:flex;gap:24px;align-items:center;justify-content:space-between;flex-wrap:wrap}#lavora-p h2{margin:6px 0;font-size:clamp(1.5rem,2.5vw,2rem);color:#fff}#lavora-p p{margin:0;color:#d0d8e5}#lavora-p .ey{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#9db8ff;font-weight:700}#lavora-p button{background:#fff;color:#101828;border:0;border-radius:12px;padding:14px 22px;font-weight:700;font-size:16px;cursor:pointer}
+#pp-m{position:fixed;inset:0;background:rgba(10,16,30,.55);display:flex;align-items:center;justify-content:center;z-index:9998;padding:16px}#pp-m[hidden]{display:none}#pp-m .c{background:#fff;color:#152238;max-width:460px;width:100%;border-radius:18px;padding:24px;position:relative;max-height:92vh;overflow:auto}#pp-m input,#pp-m select{width:100%;border:1px solid #d6deeb;border-radius:10px;padding:11px;margin:0 0 8px;font:inherit}#pp-m .go{width:100%;color:#fff;border:0;cursor:pointer}#pp-m .x{position:absolute;top:8px;right:12px;background:none;border:0;font-size:22px;cursor:pointer}#pp-m label{display:flex;gap:8px;font-size:12px;color:#5e6b80;margin:4px 0 10px}#pp-m label input{width:auto}</style>
+<section id="lavora-p" aria-labelledby="h-lp"><div class="bx"><div><div class="ey">Lavora con noi</div><h2 id="h-lp">Sei un'impresa edile o un lattoniere?</h2><p>Richieste di condomini e amministratori nella tua zona: zero costi di acquisizione, un solo referente.</p></div><button type="button" id="pp-open">Candida la tua impresa</button></div></section>
 <div id="pp-m" hidden role="dialog" aria-label="Candidatura impresa"><div class="c"><button class="x" type="button" data-x aria-label="Chiudi">×</button><div id="pp-f"><h2 style="margin:0 0 12px">Candidatura impresa partner</h2>
 <form id="pp-form" novalidate><input name="nome" placeholder="Ragione sociale" autocomplete="organization" required><input name="referente" placeholder="Referente (nome e cognome)" autocomplete="name"><input name="telefono" type="tel" placeholder="Telefono" autocomplete="tel" required><input name="email" type="email" placeholder="Email" autocomplete="email" required><input name="citta" placeholder="Zona / province di lavoro"><select name="tipo"><option value="impresa">Impresa edile</option><option value="lattoniere">Lattoniere / copertura</option><option value="bonifica_amianto">Bonifica amianto</option><option value="piva_individuale">P.IVA individuale</option><option value="altro">Altro</option></select><input name="servizi" placeholder="Servizi offerti (es. rifacimento tetti, impermeabilizzazioni)"><input name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
 <label><input type="checkbox" name="privacy"> <span>Ho letto l'informativa privacy e chiedo di essere contattato per collaborare.</span></label><button class="go" type="submit">Invia candidatura</button><small id="pp-err" style="color:#b42318"></small></form></div><div id="pp-ok" hidden><h2>Candidatura ricevuta ✓</h2><p>Ti contattiamo a breve.</p></div></div></div>
@@ -686,21 +734,21 @@ var VARIANT = 'B';
 
   var content = {
     come: [
-      { n: '1', t: 'Compili', d: '7 domande sul tuo edificio, senza dati personali fino alla fine. Ci vuole circa un minuto.' },
-      { n: '2', t: 'Ricevi la stima', d: 'Vedi subito un range di costo basato sui prezzi medi di mercato, con ponteggio ed eventuale bonifica separati.' },
-      { n: '3', t: 'Ti contattano max 3 imprese verificate', d: 'Solo imprese della tua zona, con documentazione controllata. Confronti i preventivi e decidi tu, senza obblighi.' }
+      { n: '1', t: 'Compili', d: '7 domande sull’edificio, nessun dato personale fino alla fine. Circa un minuto.' },
+      { n: '2', t: 'Ricevi la stima', d: 'Range di costo su prezzi medi di mercato, con ponteggio ed eventuale bonifica separati.' },
+      { n: '3', t: 'Max 3 imprese ti contattano', d: 'Imprese della tua zona con documenti controllati. Confronti e decidi tu, senza obblighi.' }
     ],
     fattori: [
-      { t: 'Amianto', dato: '+40–80 €/mq', d: "Le vecchie coperture in fibrocemento richiedono la bonifica da parte di una ditta iscritta all'Albo Gestori Ambientali e un piano di lavoro notificato all'ASL. È una voce separata e spesso la più pesante." },
-      { t: 'Ponteggio', dato: '12–20 €/mq di facciata', d: 'È obbligatorio e si calcola sulla superficie di facciata, non del tetto. Su un condominio alto o con più fronti incide in modo significativo sul totale.' },
-      { t: 'Coibentazione', dato: 'fino a 2× il solo manto', d: "Rifare il tetto con l'isolamento costa di più del solo manto, ma riduce le dispersioni dell'ultimo piano e spesso è richiesto dalle norme energetiche quando si interviene sulla copertura." },
-      { t: 'Accessibilità', dato: 'variabile', d: "Strade strette, cortili interni, necessità di gru o di occupazione del suolo pubblico aumentano tempi e costi di cantiere." },
-      { t: 'Stagionalità', dato: 'variabile', d: "In primavera ed estate le imprese hanno agende piene e prezzi meno trattabili. Programmare in anticipo, o in autunno, aiuta a ottenere condizioni migliori." }
+      { t: 'Amianto', dato: '+40–80 €/mq', d: "Le coperture in fibrocemento richiedono bonifica da ditta iscritta all'Albo Gestori Ambientali e piano di lavoro notificato all'ASL. Voce separata e spesso la più pesante." },
+      { t: 'Ponteggio', dato: '12–20 €/mq di facciata', d: 'Obbligatorio, si calcola sulla facciata e non sul tetto. Su edifici alti o con più fronti pesa molto sul totale.' },
+      { t: 'Coibentazione', dato: 'fino a 2× il solo manto', d: "Costa più del solo manto, ma riduce le dispersioni dell'ultimo piano ed è spesso richiesta dalle norme energetiche." },
+      { t: 'Accessibilità', dato: 'variabile', d: "Strade strette, cortili interni, gru o suolo pubblico aumentano tempi e costi." },
+      { t: 'Stagionalità', dato: 'variabile', d: "In primavera ed estate le imprese sono piene e i prezzi meno trattabili. Programmare in anticipo o in autunno aiuta." }
     ],
     admin: [
-      { t: 'Comparativa pronta per l’assemblea', d: 'I 3 preventivi vengono riportati in un unico documento con voci omogenee: manto, coibentazione, ponteggio, bonifica, oneri sicurezza, tempi e garanzie.' },
-      { t: 'Tempistiche chiare', d: 'Sopralluoghi coordinati in un’unica finestra e preventivi entro tempi definiti, così puoi fissare l’assemblea con date certe.' },
-      { t: 'Gestione documentale', d: 'DURC, visura camerale, polizze RC e, dove serve, iscrizione all’Albo Gestori Ambientali: raccolti per ogni impresa e pronti da allegare al verbale.' }
+      { t: 'Comparativa pronta per l’assemblea', d: 'I 3 preventivi in un unico documento con voci omogenee: manto, coibentazione, ponteggio, bonifica, sicurezza, tempi e garanzie.' },
+      { t: 'Tempistiche chiare', d: 'Sopralluoghi in un’unica finestra e preventivi a tempi definiti: assemblea con date certe.' },
+      { t: 'Gestione documentale', d: 'DURC, visura, polizze RC e, se serve, Albo Gestori Ambientali: raccolti per ogni impresa, pronti per il verbale.' }
     ],
     casi: [
       { citta: 'Milano', mq: '620 mq', importo: '€ 148.000', durata: '7 settimane', tipo: 'Rifacimento completo con coibentazione' },
