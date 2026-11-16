@@ -260,15 +260,56 @@ footer nav button{background:none;border:0;padding:0;color:#fff;font:inherit;fon
 @media (max-width:767px){
   .br-m{display:none}
   h1{font-size:clamp(20px,5.4vw,26px);line-height:1.12;max-width:none;letter-spacing:-.02em}
-  h1 .hl{display:block;white-space:nowrap}
+  h1 .hl{display:block}
   .sub{font-size:clamp(12px,3.3vw,14px);line-height:1.35;max-width:none;color:#E1E9F0}
-  .sub .hl{display:block;white-space:nowrap}
+  .sub .hl{display:block}
   .est{gap:8px;padding:14px 12px}
   .rw{padding:6px 0}
   .rw small{display:none}
   .est-det summary{color:#E8EEF4}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+/* ===== DESIGN SYSTEM v1 — token (unica fonte) ===== */
+:root{
+  --font:'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --fs-xs:13px;--fs-sm:14px;--fs-md:16px;--fs-lg:20px;--fs-xl:28px;--fs-2xl:clamp(30px,4.2vw,52px);
+  --sp-1:4px;--sp-2:8px;--sp-3:12px;--sp-4:16px;--sp-5:20px;--sp-6:24px;--sp-8:32px;--sp-12:48px;
+  --r-sm:10px;--r-md:14px;--r-lg:20px;--r-full:999px;
+  --sh-1:0 1px 2px rgba(18,48,74,.08);--sh-2:0 12px 32px rgba(18,48,74,.16);--sh-3:0 24px 60px rgba(0,0,0,.28);
+  --tap:48px;
+}
+/* pilota: hero + quiz + cookie */
+.hero-grid{--min:440px;align-items:center;padding-top:var(--sp-6);padding-bottom:var(--sp-12)}
+.hero-txt{padding-top:0;gap:var(--sp-5)}
+h1{font-size:var(--fs-2xl);line-height:1.08}
+.sub{font-size:var(--fs-lg);max-width:46ch}
+.cta-box{max-width:none}.cta-box .btn{max-width:420px}
+.trust{text-align:left;font-size:var(--fs-sm)}
+.checks{margin-top:0;gap:var(--sp-3)}.checks div{font-size:var(--fs-md)}
+.card{border-radius:var(--r-lg);box-shadow:var(--sh-3)}
+.btn,.opt,.inp,.sugg,.est,.gate,.fat,.fat-cta,.restored{border-radius:var(--r-sm)}
+.btn{min-height:var(--tap);font-size:var(--fs-md)}.btn-lg{min-height:56px;font-size:var(--fs-md)}
+.opt{min-height:60px;border-radius:var(--r-md)}
+.q-step{font-size:var(--fs-sm)}
+.q-head{min-height:var(--tap)}.q-back,.q-reset{min-height:var(--tap);display:inline-flex;align-items:center}
+.q-title{font-size:var(--fs-xl)}
+.q{gap:var(--sp-5)}
+.inp{font-size:16px}
+.ck-btns button{min-height:var(--tap);border-radius:var(--r-sm)}
+.x{width:var(--tap);height:var(--tap)}
+@media (max-width:767px){
+  .top small{display:none}
+  .hero-grid{gap:var(--sp-3);padding-top:var(--sp-3);padding-bottom:var(--sp-5)}
+  h1{font-size:clamp(24px,7vw,30px)}
+  .sub{font-size:var(--fs-md);line-height:1.4}
+  .opt{min-height:56px}
+  .q-title{font-size:22px}
+  .ck{width:calc(100vw - 16px);max-width:none;left:8px;right:8px;padding:var(--sp-3);border-radius:var(--r-md)}
+  .ck{padding:10px 12px;gap:6px}.ck p{font-size:12px;line-height:1.35}.ck-h b{font-size:14px}
+  .ck-btns{gap:6px}.ck-btns button{font-size:12px;min-height:44px}
+  .x{width:44px;height:44px;margin:-8px -8px 0 0;border-color:transparent;background:transparent}
+}
 </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-BH14B1WG83"></script>
@@ -300,8 +341,8 @@ footer nav button{background:none;border:0;padding:0;color:#fff;font:inherit;fon
   <div class="wrap top"><div class="logo"><i></i>TettoCondominiale</div><small>3 imprese verificate a confronto</small></div>
   <div class="wrap grid hero-grid">
     <div class="hero-txt">
-      <h1><span class="hl">Quanto costa rifare il tetto</span><br class="br-m"><span class="hl">del tuo condominio?</span></h1>
-      <p class="sub"><span class="hl">Stima indicativa in 60 secondi.</span><br class="br-m"><span class="hl">Poi fino a 3 preventivi gratuiti da imprese verificate della tua zona.</span></p>
+      <h1><span class="hl">Quanto costa rifare il tetto</span> <span class="hl">del tuo condominio?</span></h1>
+      <p class="sub"><span class="hl">Stima indicativa in 60 secondi.</span> <span class="hl">Poi fino a 3 preventivi gratuiti da imprese verificate della tua zona.</span></p>
       <div class="cta-box">
         <button type="button" class="btn btn-lg" data-cta aria-label="Calcola la stima del rifacimento tetto">Calcola la stima →</button>
         <span class="trust">Gratuito · Nessun obbligo · Dati non venduti a terzi senza consenso</span>
@@ -757,7 +798,7 @@ var VARIANT = 'B';
 
   function quizHTML() {
     var x = S[st.step], n = st.step;
-    var h = '<div class="q-head"><button type="button" class="q-back" data-act="back" style="visibility:' + (n > 0 ? 'visible' : 'hidden') + '">← Indietro</button><span class="q-step">Passo ' + (n + 1) + ' di 7</span><button type="button" class="q-reset" data-act="reset">Azzera</button></div>' +
+    var h = '<div class="q-head"><button type="button" class="q-back" data-act="back" ' + (n > 0 ? '' : 'hidden') + '>← Indietro</button><span class="q-step">Passo ' + (n + 1) + ' di 7</span><button type="button" class="q-reset" data-act="reset">Azzera</button></div>' +
       '<div class="bar" role="progressbar" aria-valuemin="1" aria-valuemax="7" aria-valuenow="' + (n + 1) + '"><i style="width:' + Math.round(n / 7 * 100 + 100 / 14) + '%"></i></div>';
     if (st.restored) h += '<div class="restored"><span>Abbiamo ripreso da dove eri rimasto.</span><button type="button" data-act="restart">Ricomincia</button></div>';
     h += '<div><p class="q-title" role="heading" aria-level="3">' + esc(x.title) + '</p>' + (x.help ? '<p class="q-help">' + esc(x.help) + '</p>' : '') + '</div>';
