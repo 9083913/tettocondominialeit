@@ -365,6 +365,51 @@ section#lavora-p button{border-radius:var(--r-sm);min-height:var(--tap);padding:
 </script>
 <noscript><div><img src="https://mc.yandex.ru/watch/114096783" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
+<script>
+(function () {
+  var websiteId = '5d89fd63-2879-4c36-9f43-4ce1a09f086e';
+  var scriptUrl = 'https://analytics.buclis.com:8443/script.js';
+  var script = null, active = false, sentPageview = false;
+  function permitted() {
+    try { var c = JSON.parse(localStorage.getItem('tc_consent_v1') || 'null'); return !!(c && c.statistiche === true); }
+    catch (e) { return false; }
+  }
+  function stop() {
+    active = false;
+    if (script && script.parentNode) script.parentNode.removeChild(script);
+    script = null;
+  }
+  function start() {
+    if (!permitted()) { stop(); return; }
+    active = true;
+    if (script || sentPageview) return;
+    script = document.createElement('script');
+    script.defer = true;
+    script.src = scriptUrl;
+    script.setAttribute('data-website-id', websiteId);
+    script.setAttribute('data-auto-track', 'false');
+    script.onload = function () {
+      if (!active || !permitted()) { stop(); return; }
+      if (window.umami && typeof window.umami.track === 'function') {
+        window.umami.track();
+        sentPageview = true;
+      }
+    };
+    script.onerror = function () { script = null; };
+    document.head.appendChild(script);
+  }
+  function changed(c) { if (c && c.statistiche === true) start(); else stop(); }
+  window.addEventListener('storage', function (e) {
+    if (e.key === 'tc_consent_v1') changed(permitted() ? { statistiche: true } : null);
+  });
+  function attachCmp() {
+    if (window.TC && typeof window.TC.onConsent === 'function') window.TC.onConsent(changed);
+  }
+  window.addEventListener('tc:ready', attachCmp);
+  attachCmp();
+  if (permitted()) start();
+})();
+</script>
 <title>Rifacimento tetto condominiale: stima e 3 preventivi</title>
 <meta name="description" content="Stima del rifacimento del tetto condominiale in 60 secondi e fino a 3 preventivi comparabili per l&#x27;assemblea, con ponteggio e amianto a parte.">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
