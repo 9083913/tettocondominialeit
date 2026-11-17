@@ -73,3 +73,6 @@ footer.sf{padding-top:40px}
 footer.sf .wrap.sf-grid{display:grid;gap:28px;grid-template-columns:2fr 1.3fr 1.3fr 1.2fr 1.2fr;align-items:start;flex-wrap:nowrap}
 @media(max-width:1000px){footer.sf .wrap.sf-grid{grid-template-columns:1fr 1fr}}@media(max-width:560px){footer.sf .wrap.sf-grid{grid-template-columns:1fr}}
 footer.sf .wrap.sf-bot{display:block}
+@media(min-width:900px){footer.sf .wrap.sf-bot{white-space:nowrap}}
+footer.sf .wrap.sf-bot{overflow-wrap:anywhere}
+@media(min-width:900px){footer.sf .wrap.sf-bot{overflow-wrap:normal}}
