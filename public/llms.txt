@@ -1,0 +1,79 @@
+# TettoCondominiale
+
+> TettoCondominiale (tettocondominiale.it) è un servizio di EMIDA SRL (P.IVA 05011210233, Via Vespucci 3, 37011 Bardolino (VR)) che stima il costo dei lavori sul tetto in 60 secondi e mette in contatto condomini e amministratori di condominio con fino a 3 imprese verificate. Non è un'impresa edile. Area di servizio: Italia.
+
+Sito gemello per case singole e aziende: https://preventivotetto.it/
+
+## Prezzi di riferimento 2026 (netto IVA, modello di calcolo EMIDA SRL; coefficiente regionale 0,90–1,10)
+
+| Voce | Prezzo |
+|---|---|
+| Rifacimento completo con coibentazione | 210–300 €/mq |
+| Solo manto di copertura | 115–170 €/mq |
+| Riparazione localizzata | 2.500–9.000 € (+1.500–4.000 € mezzi di accesso) |
+| Ponteggio | 12–18 €/mq di facciata (12–20 nelle guide) |
+| Bonifica amianto | 45–85 €/mq |
+| Lattonerie | 55–95 €/ml |
+| Linea vita | 3.500–8.000 € |
+| Sicurezza + spese tecniche | 11–14% dei lavori |
+| IVA (manutenzione straordinaria) | 10% |
+
+Sono stime di orientamento, non preventivi né prezzi di cantiere rilevati.
+
+## Come verifichiamo le imprese
+
+DURC regolare, visura camerale, polizza RC in corso di validità, e per l'amianto iscrizione all'Albo Gestori Ambientali (categorie 10A/10B). Ogni richiesta arriva al massimo a 3 imprese.
+
+## Pagine principali
+
+- [Home e calcolatore](https://tettocondominiale.it/)
+- [Osservatorio prezzi tetti 2026](https://tettocondominiale.it/osservatorio-prezzi-tetti-2026/)
+- [Metodologia prezzi](https://tettocondominiale.it/metodologia-prezzi/)
+- [Chi siamo](https://tettocondominiale.it/chi-siamo/)
+- [Come verifichiamo le imprese](https://tettocondominiale.it/come-verifichiamo-le-imprese/)
+- [Contatti](https://tettocondominiale.it/contatti/)
+- [Zone servite](https://tettocondominiale.it/zone-servite/)
+
+## Servizi
+
+- [Rifacimento tetto condominiale: costi, delibera e ripartizione](https://tettocondominiale.it/rifacimento-tetto-condominio/): Il rifacimento del tetto condominiale costa 210–300 €/mq con coibentazione, più ponteggio sulla facciata (12–20 €/mq), linea vita e lattonerie. Un edificio di…
+- [Lastrico solare condominiale: chi paga e quanto costa rifarlo](https://tettocondominiale.it/lastrico-solare-condominio/): Se il lastrico solare è a uso esclusivo di un condomino, la riparazione o ricostruzione si ripartisce secondo l'art. 1126 c.c.: un terzo a chi ne ha l'uso…
+- [Bonifica amianto in condominio: obblighi, costi e documenti](https://tettocondominiale.it/bonifica-amianto-condominio/): Se il tetto del condominio ha lastre in eternit, l'amministratore deve far valutare lo stato di conservazione e, se serve, deliberare la bonifica. Costa 45–85…
+- [Coibentazione del tetto condominiale: costi, requisiti e delibera](https://tettocondominiale.it/coibentazione-tetto-condominio/): Coibentare il tetto condominiale costa quasi il doppio del solo manto (210–300 contro 115–170 €/mq) ma riduce le dispersioni dell'ultimo piano e rispetta i…
+- [Infiltrazioni dal tetto in condominio: chi risponde e come intervenire](https://tettocondominiale.it/infiltrazioni-tetto-condominio/): Se l'infiltrazione nasce dal tetto, parte comune (art. 1117 c.c.), la riparazione è a carico del condominio con ripartizione per millesimi; un intervento…
+- [Linea vita in condominio: obbligo, costi e manutenzione](https://tettocondominiale.it/linea-vita-condominio/): Sulle coperture condominiali nuove o rifatte è in genere prescritta la linea vita secondo le norme regionali. Costa 3.500–8.000 € per un edificio standard e va…
+- [Grondaie e pluviali in condominio: costi, ripartizione e manutenzione](https://tettocondominiale.it/grondaie-pluviali-condominio/): Grondaie e pluviali sono parti comuni: rifarli costa 55–95 €/ml e si ripartisce per millesimi. Un edificio con 90 ml di perimetro spende 4.950–8.550 € circa,…
+- [Manutenzione del tetto condominiale: piano annuale e controlli](https://tettocondominiale.it/manutenzione-tetto-condominio/): Una manutenzione ordinaria annuale (pulizia di grondaie e pluviali, ispezione visiva dei manti e dei camini) costa poche centinaia di euro e può posticipare di…
+
+## Guide
+
+- [Ripartizione delle spese del tetto in condominio: come si calcola](https://tettocondominiale.it/ripartizione-spese-tetto-condominio/)
+- [Millesimi e rifacimento del tetto: guida con esempi di calcolo](https://tettocondominiale.it/millesimi-rifacimento-tetto/)
+- [Delibera in assemblea per il rifacimento del tetto: maggioranze e documenti](https://tettocondominiale.it/delibera-assemblea-rifacimento-tetto/)
+- [Fondo speciale per il rifacimento del tetto: cos'è e come costituirlo](https://tettocondominiale.it/fondo-speciale-tetto-condominio/)
+- [Capitolato tecnico per il rifacimento del tetto: voci da includere](https://tettocondominiale.it/capitolato-tetto-condominio/)
+- [Bonus tetto condominio 2026: detrazioni sulle parti comuni](https://tettocondominiale.it/bonus-tetto-condominio-2026/)
+- [Documenti da chiedere all'impresa prima di affidare il tetto](https://tettocondominiale.it/documenti-impresa-condominio/)
+
+## Città
+
+- [Rifacimento tetto Milano](https://tettocondominiale.it/rifacimento-tetto-milano/)
+- [Rifacimento tetto Roma](https://tettocondominiale.it/rifacimento-tetto-roma/)
+- [Rifacimento tetto Torino](https://tettocondominiale.it/rifacimento-tetto-torino/)
+- [Rifacimento tetto Napoli](https://tettocondominiale.it/rifacimento-tetto-napoli/)
+- [Rifacimento tetto Bologna](https://tettocondominiale.it/rifacimento-tetto-bologna/)
+- [Rifacimento tetto Firenze](https://tettocondominiale.it/rifacimento-tetto-firenze/)
+- [Rifacimento tetto Genova](https://tettocondominiale.it/rifacimento-tetto-genova/)
+- [Rifacimento tetto Venezia](https://tettocondominiale.it/rifacimento-tetto-venezia/)
+- [Rifacimento tetto Verona](https://tettocondominiale.it/rifacimento-tetto-verona/)
+- [Rifacimento tetto Padova](https://tettocondominiale.it/rifacimento-tetto-padova/)
+- [Rifacimento tetto Brescia](https://tettocondominiale.it/rifacimento-tetto-brescia/)
+- [Rifacimento tetto Bergamo](https://tettocondominiale.it/rifacimento-tetto-bergamo/)
+- [Rifacimento tetto Trento](https://tettocondominiale.it/rifacimento-tetto-trento/)
+- [Rifacimento tetto Bolzano](https://tettocondominiale.it/rifacimento-tetto-bolzano/)
+- [Rifacimento tetto Parma](https://tettocondominiale.it/rifacimento-tetto-parma/)
+- [Rifacimento tetto Perugia](https://tettocondominiale.it/rifacimento-tetto-perugia/)
+- [Rifacimento tetto Bari](https://tettocondominiale.it/rifacimento-tetto-bari/)
+- [Rifacimento tetto Palermo](https://tettocondominiale.it/rifacimento-tetto-palermo/)
+- [Rifacimento tetto Catania](https://tettocondominiale.it/rifacimento-tetto-catania/)
+- [Rifacimento tetto Cagliari](https://tettocondominiale.it/rifacimento-tetto-cagliari/)

@@ -1,0 +1,170 @@
+# TettoCondominiale
+
+> TettoCondominiale (tettocondominiale.it) è un servizio di EMIDA SRL (P.IVA 05011210233, Via Vespucci 3, 37011 Bardolino (VR)) che stima il costo dei lavori sul tetto in 60 secondi e mette in contatto condomini e amministratori di condominio con fino a 3 imprese verificate. Non è un'impresa edile. Area di servizio: Italia.
+
+Sito gemello per case singole e aziende: https://preventivotetto.it/
+
+## Prezzi di riferimento 2026 (netto IVA, modello di calcolo EMIDA SRL; coefficiente regionale 0,90–1,10)
+
+| Voce | Prezzo |
+|---|---|
+| Rifacimento completo con coibentazione | 210–300 €/mq |
+| Solo manto di copertura | 115–170 €/mq |
+| Riparazione localizzata | 2.500–9.000 € (+1.500–4.000 € mezzi di accesso) |
+| Ponteggio | 12–18 €/mq di facciata (12–20 nelle guide) |
+| Bonifica amianto | 45–85 €/mq |
+| Lattonerie | 55–95 €/ml |
+| Linea vita | 3.500–8.000 € |
+| Sicurezza + spese tecniche | 11–14% dei lavori |
+| IVA (manutenzione straordinaria) | 10% |
+
+Sono stime di orientamento, non preventivi né prezzi di cantiere rilevati.
+
+## Come verifichiamo le imprese
+
+DURC regolare, visura camerale, polizza RC in corso di validità, e per l'amianto iscrizione all'Albo Gestori Ambientali (categorie 10A/10B). Ogni richiesta arriva al massimo a 3 imprese.
+
+## Servizi (testo)
+
+### Rifacimento tetto condominiale: costi, delibera e ripartizione
+URL: https://tettocondominiale.it/rifacimento-tetto-condominio/
+
+Il rifacimento del tetto condominiale costa 210–300 €/mq con coibentazione, più ponteggio sulla facciata (12–20 €/mq), linea vita e lattonerie. Un edificio di 16 appartamenti e 450 mq di tetto spende in media € 161.000–243.500 ivato, cioè € 10.100–15.200 ad appartamento. La spesa si ripartisce con i millesimi (art. 1123 c.c.).
+
+- **Quanto costa rifare il tetto di un condominio di 16 appartamenti?** Nel modello EMIDA 2026, con 450 mq di tetto, il totale ivato è € 161.000–243.500, pari a € 10.100–15.200 ad appartamento in media prima della ripartizione per millesimi.
+- **Serve unanimità in assemblea?** No: per le opere di manutenzione straordinaria serve la maggioranza degli intervenuti che rappresenti almeno 500 millesimi (art. 1136 c.c.).
+- **Chi sceglie l'impresa?** L'assemblea, su proposta dell'amministratore e dopo il confronto di più preventivi; la delibera indica l'impresa e le condizioni.
+
+### Lastrico solare condominiale: chi paga e quanto costa rifarlo
+URL: https://tettocondominiale.it/lastrico-solare-condominio/
+
+Se il lastrico solare è a uso esclusivo di un condomino, la riparazione o ricostruzione si ripartisce secondo l'art. 1126 c.c.: un terzo a chi ne ha l'uso esclusivo, due terzi a tutti i condomini in base ai millesimi. L'impermeabilizzazione costa in genere 115–170 €/mq (netto IVA).
+
+- **L'art. 1126 si applica anche al terrazzo praticabile?** Sì, se serve da copertura dell'edificio. L'uso esclusivo concede il godimento ma la funzione di copertura resta comune.
+- **Chi paga se l'infiltrazione nasce dal lastrico?** Le spese di riparazione seguono l'art. 1126 c.c.; i danni ai piani sottostanti seguono le regole sulla responsabilità e vanno valutati caso per caso con un legale.
+
+### Bonifica amianto in condominio: obblighi, costi e documenti
+URL: https://tettocondominiale.it/bonifica-amianto-condominio/
+
+Se il tetto del condominio ha lastre in eternit, l'amministratore deve far valutare lo stato di conservazione e, se serve, deliberare la bonifica. Costa 45–85 €/mq (netto IVA) e richiede una ditta iscritta all'Albo Gestori Ambientali con piano di lavoro notificato all'ASL. È una voce separata nel preventivo.
+
+- **L'amianto va rimosso per forza?** Se le lastre sono integre si può monitorare o incapsulare; se degradate, o se si fa il rifacimento, la rimozione è la soluzione strutturale.
+- **Chi controlla la ditta?** L'amministratore raccoglie e conserva i documenti; l'ASL approva il piano di lavoro prima dell'inizio.
+
+### Coibentazione del tetto condominiale: costi, requisiti e delibera
+URL: https://tettocondominiale.it/coibentazione-tetto-condominio/
+
+Coibentare il tetto condominiale costa quasi il doppio del solo manto (210–300 contro 115–170 €/mq) ma riduce le dispersioni dell'ultimo piano e rispetta i limiti di trasmittanza per la zona climatica (0,19–0,27 W/m²K). Va deliberata in assemblea insieme al rifacimento.
+
+- **La coibentazione cambia i millesimi?** No: i millesimi di proprietà restano gli stessi; si ripartisce con le tabelle esistenti, salvo diverse previsioni di regolamento.
+- **Serve un progetto?** Sì: per l'isolamento serve in genere una relazione tecnica che indichi spessori e trasmittanze finali.
+
+### Infiltrazioni dal tetto in condominio: chi risponde e come intervenire
+URL: https://tettocondominiale.it/infiltrazioni-tetto-condominio/
+
+Se l'infiltrazione nasce dal tetto, parte comune (art. 1117 c.c.), la riparazione è a carico del condominio con ripartizione per millesimi; un intervento localizzato costa 2.500–9.000 € più 1.500–4.000 € di mezzi di accesso. L'amministratore può disporre lavori urgenti senza attendere l'assemblea (art. 1135 c.c.).
+
+- **Chi paga se la perdita nasce da un lastrico a uso esclusivo?** Si applica l'art. 1126 c.c. alla riparazione; i danni vanno ricostruiti caso per caso.
+- **Quando riparare e quando rifare?** Se le infiltrazioni sono ripetute, rifare il manto o l'impermeabilizzazione costa meno di interventi ripetuti.
+
+### Linea vita in condominio: obbligo, costi e manutenzione
+URL: https://tettocondominiale.it/linea-vita-condominio/
+
+Sulle coperture condominiali nuove o rifatte è in genere prescritta la linea vita secondo le norme regionali. Costa 3.500–8.000 € per un edificio standard e va ispezionata periodicamente: l'amministratore conserva documenti e certificazioni da consegnare a chi lavorerà in quota.
+
+- **Va inclusa nel preventivo?** Sì, come voce separata: confrontando i preventivi verifica che tutti la contemplino.
+
+### Grondaie e pluviali in condominio: costi, ripartizione e manutenzione
+URL: https://tettocondominiale.it/grondaie-pluviali-condominio/
+
+Grondaie e pluviali sono parti comuni: rifarli costa 55–95 €/ml e si ripartisce per millesimi. Un edificio con 90 ml di perimetro spende 4.950–8.550 € circa, da fare insieme al tetto per condividere ponteggio. La pulizia annuale è la manutenzione più economica.
+
+- **Chi paga i pluviali che passano in una proprietà esclusiva?** I pluviali di scarico delle acque del tetto sono in genere parte comune anche se attraversano proprietà esclusive; verifica il regolamento.
+
+### Manutenzione del tetto condominiale: piano annuale e controlli
+URL: https://tettocondominiale.it/manutenzione-tetto-condominio/
+
+Una manutenzione ordinaria annuale (pulizia di grondaie e pluviali, ispezione visiva dei manti e dei camini) costa poche centinaia di euro e può posticipare di anni il rifacimento. Ispeziona anche dopo grandine e vento forte, e fai un controllo tecnico completo ogni 5 anni.
+
+- **La manutenzione ordinaria serve la delibera?** L'amministratore può provvedere alla manutenzione ordinaria nei limiti del budget approvato; per la straordinaria serve l'assemblea.
+
+## Guide (testo)
+
+### Ripartizione delle spese del tetto in condominio: come si calcola
+URL: https://tettocondominiale.it/ripartizione-spese-tetto-condominio/
+
+Le spese del tetto, parte comune (art. 1117 c.c.), si ripartiscono in proporzione ai millesimi di proprietà (art. 1123 c.c.). Con 100.000 € di spesa, chi ha 50 millesimi paga 5.000 €. Il lastrico solare a uso esclusivo segue l'art. 1126 c.c.: un terzo a chi lo usa, due terzi agli altri.
+
+- **Il tetto si paga anche se si abita al piano terra?** Sì: il tetto è parte comune a tutti i condomini, quindi la spesa grava su tutti secondo i millesimi.
+- **Si può pagare a rate?** Il fondo speciale (art. 1135 c.c.) prevede versamenti graduali in base alla durata dei lavori e alla delibera.
+
+### Millesimi e rifacimento del tetto: guida con esempi di calcolo
+URL: https://tettocondominiale.it/millesimi-rifacimento-tetto/
+
+I millesimi esprimono il valore di ogni unità rispetto all'edificio (totale 1.000). Per il tetto si usa la tabella di proprietà generale: se un'unità ha 80 millesimi, paga l'8% della spesa. Un tetto da 160.000 € comporta quindi 12.800 € per quell'unità.
+
+- **Chi calcola il riparto?** L'amministratore, sulla base della tabella millesimale e della delibera; in caso di dubbi è utile un tecnico.
+
+### Delibera in assemblea per il rifacimento del tetto: maggioranze e documenti
+URL: https://tettocondominiale.it/delibera-assemblea-rifacimento-tetto/
+
+Il rifacimento del tetto è manutenzione straordinaria: serve la maggioranza degli intervenuti che rappresenti almeno 500 millesimi (art. 1136 c.c.). Porta in assemblea 2–3 preventivi comparabili, il capitolato, il riparto delle spese e la proposta di fondo speciale (art. 1135 c.c.).
+
+- **Cosa succede se un condomino è assente?** La delibera, se regolarmente assunta, vincola anche gli assenti, che possono impugnarla entro 30 giorni dalla comunicazione (art. 1137 c.c.).
+
+### Fondo speciale per il rifacimento del tetto: cos'è e come costituirlo
+URL: https://tettocondominiale.it/fondo-speciale-tetto-condominio/
+
+Per le opere di manutenzione straordinaria, come il rifacimento del tetto, l'assemblea deve costituire un fondo speciale di importo pari all'ammontare dei lavori (art. 1135 c.c.). Se il contratto prevede pagamenti graduali per stato di avanzamento lavori, il fondo può essere costituito in relazione ai singoli pagamenti.
+
+- **Il fondo vale anche per piccoli interventi?** È obbligatorio per le manutenzioni straordinarie; per quelle ordinarie si usa il bilancio preventivo.
+
+### Capitolato tecnico per il rifacimento del tetto: voci da includere
+URL: https://tettocondominiale.it/capitolato-tetto-condominio/
+
+Il capitolato descrive lavori, materiali, spessori e condizioni dell'appalto, in modo che tutte le imprese preventivino le stesse voci. Includi manto, coibentazione, ponteggio, sicurezza, smaltimento, tempi, garanzie e penali. Senza capitolato i preventivi non sono confrontabili e l'assemblea decide al buio.
+
+- **Serve per forza un tecnico?** Per lavori importanti è consigliato; con un capitolato standard puoi comunque far confrontare le offerte.
+
+### Bonus tetto condominio 2026: detrazioni sulle parti comuni
+URL: https://tettocondominiale.it/bonus-tetto-condominio-2026/
+
+Il rifacimento del tetto condominiale può accedere alle detrazioni per ristrutturazione e, con l'isolamento termico, all'ecobonus. Le quote si ripartiscono tra i condomini secondo i millesimi, ciascuno detrae la propria. Verifica aliquote, limiti e adempimenti 2026 con l'Agenzia delle Entrate o un tecnico.
+
+- **La detrazione spetta a tutti i condomini?** Spetta a chi sostiene la spesa e ha titolo sull'immobile, in proporzione alla quota pagata; i dettagli dipendono dal singolo caso.
+
+### Documenti da chiedere all'impresa prima di affidare il tetto
+URL: https://tettocondominiale.it/documenti-impresa-condominio/
+
+Prima di affidare il tetto condominiale chiedi all'impresa DURC regolare, visura camerale, polizza RC con massimale adeguato, POS, e per l'amianto iscrizione all'Albo Gestori Ambientali e piano di lavoro ASL. Conservali nel fascicolo del condominio: servono per il verbale e in caso di contestazioni.
+
+- **Chi verifica i documenti?** L'amministratore, anche con il supporto di un tecnico; le imprese che passano da TettoCondominiale hanno già documenti controllati.
+
+## Prezzi per città (2026, €/mq netto IVA)
+
+| Città | Coeff. | Solo manto | Completo | Ponteggio €/mq facciata |
+|---|---|---|---|---|
+| Milano (MI), zona E | 1.10 | 127–187 | 231–330 | 13–20 |
+| Roma (RM), zona D | 1.00 | 115–170 | 210–300 | 12–18 |
+| Torino (TO), zona E | 1.04 | 120–177 | 218–312 | 12–19 |
+| Napoli (NA), zona C | 0.92 | 106–156 | 193–276 | 11–17 |
+| Bologna (BO), zona E | 1.04 | 120–177 | 218–312 | 12–19 |
+| Firenze (FI), zona D | 1.03 | 118–175 | 216–309 | 12–19 |
+| Genova (GE), zona D | 1.04 | 120–177 | 218–312 | 12–19 |
+| Venezia (VE), zona E | 1.06 | 122–180 | 223–318 | 13–19 |
+| Verona (VR), zona E | 1.06 | 122–180 | 223–318 | 13–19 |
+| Padova (PD), zona E | 1.06 | 122–180 | 223–318 | 13–19 |
+| Brescia (BS), zona E | 1.10 | 127–187 | 231–330 | 13–20 |
+| Bergamo (BG), zona E | 1.10 | 127–187 | 231–330 | 13–20 |
+| Trento (TN), zona F | 1.06 | 122–180 | 223–318 | 13–19 |
+| Bolzano (BZ), zona F | 1.06 | 122–180 | 223–318 | 13–19 |
+| Parma (PR), zona E | 1.04 | 120–177 | 218–312 | 12–19 |
+| Perugia (PG), zona E | 1.00 | 115–170 | 210–300 | 12–18 |
+| Bari (BA), zona C | 0.92 | 106–156 | 193–276 | 11–17 |
+| Palermo (PA), zona B | 0.90 | 104–153 | 189–270 | 11–16 |
+| Catania (CT), zona B | 0.90 | 104–153 | 189–270 | 11–16 |
+| Cagliari (CA), zona C | 1.00 | 115–170 | 210–300 | 12–18 |
+
+## Riferimenti normativi citati
+
+Art. 1117, 1123, 1126, 1135, 1136, 1137 Codice civile; D.Lgs. 81/2008; DM 26/06/2015 (requisiti minimi di efficienza energetica); UNI EN 795 e UNI 11560 (linea vita).

@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://tettocondominiale.it/</loc>
-    <lastmod>2026-11-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-</urlset>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<sitemap><loc>https://tettocondominiale.it/sitemap-core.xml</loc><lastmod>2026-11-17</lastmod></sitemap>
+<sitemap><loc>https://tettocondominiale.it/sitemap-servizi.xml</loc><lastmod>2026-11-17</lastmod></sitemap>
+<sitemap><loc>https://tettocondominiale.it/sitemap-guide.xml</loc><lastmod>2026-11-17</lastmod></sitemap>
+<sitemap><loc>https://tettocondominiale.it/sitemap-citta.xml</loc><lastmod>2026-11-17</lastmod></sitemap>
+</sitemapindex>

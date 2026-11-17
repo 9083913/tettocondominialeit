@@ -1,3 +1,121 @@
+# Crawler ammessi, inclusi quelli per motori di ricerca AI e assistenti.
+User-agent: Googlebot
+Allow: /
+Disallow: /api/
+Disallow: /gestione-lead
+Disallow: /gestione-lead.html
+Disallow: /api/admin/
+Disallow: /collega-zoho.html
+Disallow: /collega-zoho-completato.html
+
+User-agent: Bingbot
+Allow: /
+Disallow: /api/
+Disallow: /gestione-lead
+Disallow: /gestione-lead.html
+Disallow: /api/admin/
+Disallow: /collega-zoho.html
+Disallow: /collega-zoho-completato.html
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /api/
+Disallow: /gestione-lead
+Disallow: /gestione-lead.html
+Disallow: /api/admin/
+Disallow: /collega-zoho.html
+Disallow: /collega-zoho-completato.html
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /api/
+Disallow: /gestione-lead
+Disallow: /gestione-lead.html
+Disallow: /api/admin/
+Disallow: /collega-zoho.html
+Disallow: /collega-zoho-completato.html
+
+User-agent: GPTBot
+Allow: /
+Disallow: /api/
+Disallow: /gestione-lead
+Disallow: /gestione-lead.html
+Disallow: /api/admin/
+Disallow: /collega-zoho.html
+Disallow: /collega-zoho-completato.html
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /api/
+Disallow: /gestione-lead
+Disallow: /gestione-lead.html
+Disallow: /api/admin/
+Disallow: /collega-zoho.html
+Disallow: /collega-zoho-completato.html
+
+User-agent: Claude-User
+Allow: /
+Disallow: /api/
+Disallow: /gestione-lead
+Disallow: /gestione-lead.html
+Disallow: /api/admin/
+Disallow: /collega-zoho.html
+Disallow: /collega-zoho-completato.html
+
+User-agent: Claude-SearchBot
+Allow: /
+Disallow: /api/
+Disallow: /gestione-lead
+Disallow: /gestione-lead.html
+Disallow: /api/admin/
+Disallow: /collega-zoho.html
+Disallow: /collega-zoho-completato.html
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /api/
+Disallow: /gestione-lead
+Disallow: /gestione-lead.html
+Disallow: /api/admin/
+Disallow: /collega-zoho.html
+Disallow: /collega-zoho-completato.html
+
+User-agent: Perplexity-User
+Allow: /
+Disallow: /api/
+Disallow: /gestione-lead
+Disallow: /gestione-lead.html
+Disallow: /api/admin/
+Disallow: /collega-zoho.html
+Disallow: /collega-zoho-completato.html
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /api/
+Disallow: /gestione-lead
+Disallow: /gestione-lead.html
+Disallow: /api/admin/
+Disallow: /collega-zoho.html
+Disallow: /collega-zoho-completato.html
+
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /api/
+Disallow: /gestione-lead
+Disallow: /gestione-lead.html
+Disallow: /api/admin/
+Disallow: /collega-zoho.html
+Disallow: /collega-zoho-completato.html
+
+User-agent: CCBot
+Allow: /
+Disallow: /api/
+Disallow: /gestione-lead
+Disallow: /gestione-lead.html
+Disallow: /api/admin/
+Disallow: /collega-zoho.html
+Disallow: /collega-zoho-completato.html
+
 User-agent: *
 Allow: /
 Disallow: /api/
